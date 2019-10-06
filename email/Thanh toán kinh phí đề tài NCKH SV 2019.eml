@@ -1,0 +1,996 @@
+Delivered-To: nghiab1605229@student.ctu.edu.vn
+Received: by 2002:a2e:4258:0:0:0:0:0 with SMTP id p85csp2294328lja;
+        Sun, 22 Sep 2019 20:07:22 -0700 (PDT)
+X-Received: by 2002:ac8:1496:: with SMTP id l22mr15322110qtj.274.1569208042614;
+        Sun, 22 Sep 2019 20:07:22 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1569208042; cv=none;
+        d=google.com; s=arc-20160816;
+        b=PZ4pPr/Uy8cPC5IsZS8mBlKIsj0HR51K5gOWmMaq1VhJaI3Ur/XOL79UiVA4AzR1g5
+         D8U80Zh3V9YLeAwRtkS896kooenJcFuLacegoLlUVa1PCUc/ShOJTbVY02K9U6U24ZTI
+         jCX4DpHslfuzbESTu03iHs+wv5/tzg9fk67enYQvYRPGNZU/LJuTjl/7IK5UWb+kJHW5
+         Wv8sPacBRSz1ED/lE65t+UwMte18mVbryYTwlD+dCKZUtYQxQvKInX64uIrSKTVARWWo
+         Kxg27z6hcfj3pbplLynTvOjHIwgeyyLpj2zsQF5lYfi9cmxgSHp9o/XtijCKd7y8K82O
+         2hEQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=2kmCeMqlOFckhNomUgXWtHNpWK4dE6NF38+KC7IewPE=;
+        b=m41B8GjqqLuaCKTa1VC3BmgG/m0DuT/XoO15nFPOBj3/X822fGfl3C6LUD3vtHVrpu
+         IO5R5+/7aKLAftSPZ5bGH97MSdzvgnKper3H4f9zUmIjD4WxpHAVSuoGSpf7Wmz/K7wM
+         juosIWOFcX7Kqk8Bc6FWplc8hMWPZm+5PWFdvk++r2EBXd6wqq6uIhl29ey1A/hzaPhe
+         h6lVmlL1lZcgB/TVdj9/vK8NjqSj2Acxp+ag8VE0okx81oZAhhprK9wo/oPCUdkrD9Ie
+         ofv8ahyMQ480MFtrlOXeaH1gjVYhLYi754vgH0nKZy/f1e5AjODbEGPudVvz8CUhfAwz
+         kvqA==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@student.ctu.edu.vn header.s=google header.b=Uj9HK8M4;
+       spf=pass (google.com: domain of khanhb1605219@student.ctu.edu.vn designates 209.85.220.41 as permitted sender) smtp.mailfrom=khanhb1605219@student.ctu.edu.vn
+Return-Path: <khanhb1605219@student.ctu.edu.vn>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id j16sor6998671qvy.16.2019.09.22.20.07.22
+        for <nghiab1605229@student.ctu.edu.vn>
+        (Google Transport Security);
+        Sun, 22 Sep 2019 20:07:22 -0700 (PDT)
+Received-SPF: pass (google.com: domain of khanhb1605219@student.ctu.edu.vn designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@student.ctu.edu.vn header.s=google header.b=Uj9HK8M4;
+       spf=pass (google.com: domain of khanhb1605219@student.ctu.edu.vn designates 209.85.220.41 as permitted sender) smtp.mailfrom=khanhb1605219@student.ctu.edu.vn
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=student.ctu.edu.vn; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=2kmCeMqlOFckhNomUgXWtHNpWK4dE6NF38+KC7IewPE=;
+        b=Uj9HK8M4uI8LRow3xp26jVCgOA0ywb2DQDEFwAfuaqn/dAIEQCHbUBuFyOb0j4JPhp
+         Yl9RGg8RbsCvmvdY2/gFHUxo9v88nCySicTdyLVpe0D0vHCvEYowAGdG2k3pXRPBu09r
+         1sRu1oxHeeg7VyM2JuPJM9PGkfX6nB4bbycA4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to;
+        bh=2kmCeMqlOFckhNomUgXWtHNpWK4dE6NF38+KC7IewPE=;
+        b=qnFI3wiHDmfT7+us2yzQNjMmsj30Dwv4zAJDl40HngeJ/kOiaoyUBZJ3ales5eMFfM
+         qzKI4VUono+1Lxhhc4JP2+j67mtE51RnjqGHufsoCyePImTYTiiTSVmzmjUyE2hkVgj8
+         RQYlq5G3z5oyO/HufzmBOLxNqxJgARiGWAIXW9NTWBpQUmkdJq0FMPonkZrpkzbsb718
+         3239jyqYm5fQ5+eoNVhziHQmF1unVhmoWpqddymLwEYJmyZ8uRzY+Ljl0s8Zxs73bqTf
+         m+6PFc4QQ0GG0jZM+CJ/yU5L7bN1Vz3ZxO3A0YfqgmlY3aixgS2mPq7AQnnm0+5j11gI
+         HZOg==
+X-Gm-Message-State: APjAAAXW6FxQkLokCYl1XDM+EiwsIL+EPBCt/GMYxKMtGSjXjoiJnCN/
+	2qNzMyybm4+6FEGyHAyDMqptkwomTtFJ9+20KQRRXB06KIFeCA==
+X-Google-Smtp-Source: APXvYqz9uz5/9tw6p9aUF5OLtho3zghcRwsFwqRCKm3q2lKTrDk37VMrOEt5HMNtMD3dpA+cNFZNl/3ZEuyD/lI6xGI=
+X-Received: by 2002:ad4:42af:: with SMTP id e15mr18127302qvr.186.1569208041134;
+ Sun, 22 Sep 2019 20:07:21 -0700 (PDT)
+MIME-Version: 1.0
+References: <CACgK5X7jYY10CSxhUWETijAvBhPg8EKPi7z3D+EhEcHG6Y0=PQ@mail.gmail.com>
+In-Reply-To: <CACgK5X7jYY10CSxhUWETijAvBhPg8EKPi7z3D+EhEcHG6Y0=PQ@mail.gmail.com>
+From: Ho Huu Khanh B1605219 <khanhb1605219@student.ctu.edu.vn>
+Date: Mon, 23 Sep 2019 10:07:10 +0700
+Message-ID: <CAMgvzkNFPob_gFybMTsX4GT-4xUUVR1khutKgFYf=kum1kxDcQ@mail.gmail.com>
+Subject: =?UTF-8?B?RndkOiBUaGFuaCB0b8OhbiBraW5oIHBow60gxJHhu4EgdMOgaSBOQ0tIIFNWIDIwMTk=?=
+To: =?UTF-8?Q?Le_Minh_Nghia_ngh=C4=A9a?= <nghiab1605229@student.ctu.edu.vn>, 
+	Do Chi Khoa B1605280 <khoab1605280@student.ctu.edu.vn>, emb1605272@student.ctu.edu.vn
+Content-Type: multipart/alternative; boundary="000000000000def58505932fb71b"
+
+--000000000000def58505932fb71b
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+---------- Forwarded message ---------
+T=E1=BB=AB: Nguyen Van Tan 002024 <nguyentan@ctu.edu.vn>
+Date: Th 2, 23 thg 9, 2019 va=CC=80o lu=CC=81c 09:59
+Subject: Thanh to=C3=A1n kinh ph=C3=AD =C4=91=E1=BB=81 t=C3=A0i NCKH SV 201=
+9
+To: Bui Doan Thanh Tuyen B1706350 <tuyenb1706350@student.ctu.edu.vn>, B=C3=
+=B9i
+Ho=C3=A0ng Thu Trang <trangb1703444@student.ctu.edu.vn>, B=C3=B9i Hu=E1=BB=
+=B3nh Li=C3=AAn <
+lienb1605156@student.ctu.edu.vn>, B=C3=B9i Quang Huy <
+huyb1503552@student.ctu.edu.vn>, Cao Trung Hi=E1=BA=BFu <
+hieub1503377@student.ctu.edu.vn>, Cao V=C4=83n T=E1=BB=A9 <tub1605541@stude=
+nt.ctu.edu.vn>,
+Chanh B=C3=B4 Ry <ryb1608655@student.ctu.edu.vn>, D=C6=B0=C6=A1ng H=E1=BB=
+=AFu H=E1=BA=A1nh <
+hanhb1504288@student.ctu.edu.vn>, D=C6=B0=C6=A1ng Nguy=E1=BB=85n H=C3=A0 M=
+=E1=BB=B9 Xuy=C3=AAn <
+xuyenb1605132@student.ctu.edu.vn>, D=C6=B0=C6=A1ng Nh=E1=BB=B1t Duy <
+duyb1605075@student.ctu.edu.vn>, D=C6=B0=C6=A1ng Ph=E1=BA=A1m Quang Th=C3=
+=B4ng <
+thongb1509482@student.ctu.edu.vn>, D=C6=B0=C6=A1ng Qu=E1=BB=91c Tr=E1=BA=A1=
+ng <
+trangb1705242@student.ctu.edu.vn>, D=C6=B0=C6=A1ng Th=E1=BB=8B Linh Hu=E1=
+=BB=87 <
+hueb1608092@student.ctu.edu.vn>, D=C6=B0=C6=A1ng Th=E1=BB=8B Y=E1=BA=BFn Nh=
+i <
+nhib1604116@student.ctu.edu.vn>, Hu=E1=BB=B3nh M=E1=BA=A1nh Ph=C3=A1t <
+Phatb1600045@student.ctu.edu.vn>, Hu=E1=BB=B3nh Nh=C6=B0 Th=E1=BA=A3o <
+thaob1604296@student.ctu.edu.vn>, Hu=E1=BB=B3nh Th=E1=BB=8B Ng=E1=BB=8Dc =
+=C3=81nh <
+anhb1604166@student.ctu.edu.vn>, Hu=E1=BB=B3nh Trang Th=C6=B0 <
+thub1606185@student.ctu.edu.vn>, Hu=E1=BB=B3nh Trung Hi=E1=BA=BFu <
+hieub1600644@student.ctu.edu.vn>, Hu=E1=BB=B3nh T=E1=BA=A5n L=E1=BB=99c <
+Locb1605579@student.ctu.edu.vn>, H=C3=A0 Qu=E1=BB=91c Nam <namb1506951@stud=
+ent.ctu.edu.vn>,
+H=E1=BB=93 H=E1=BB=ADu Kh=C3=A1nh <khanhb1605219@student.ctu.edu.vn>, L=C3=
+=AA B=E1=BA=B1ng Phi <
+phib1509267@student.ctu.edu.vn>, L=C3=AA Ho=C3=A0ng Ng=E1=BB=8Dc H=C3=A0 <
+hab1607650@student.ctu.edu.vn>, L=C3=AA H=E1=BB=AFu Ngh=C4=A9a <
+nghiab1600111@student.ctu.edu.vn>, L=C3=AA H=E1=BB=AFu Th=E1=BB=8Bnh <
+thinhb1605605@student.ctu.edu.vn>, L=C3=AA Minh Hi=E1=BA=BFu <
+hieub1708049@student.ctu.edu.vn>, L=C3=AA Nguy=E1=BB=85n Kh=C3=B4i Nguy=C3=
+=AAn <
+nguyenb1605166@student.ctu.edu.vn>, L=C3=AA Nguy=E1=BB=85n Minh Duy <
+duyb1500684@student.ctu.edu.vn>, L=C3=AA Nguy=E1=BB=85n Ph=C6=B0=C6=A1ng An=
+h <
+anhb1605776@student.ctu.edu.vn>, L=C3=AA Ng=E1=BB=8Dc Long <
+longb1705005@student.ctu.edu.vn>, L=C3=AA Thanh Huy <
+Huyb1605569@student.ctu.edu.vn>, L=C3=AA Thanh Khuy=E1=BA=BFn <
+KhuyenB1605575@student.ctu.edu.vn>, L=C3=AA Th=C3=A0nh Nghi=E1=BB=87p <
+Nghiepb1610236@student.ctu.edu.vn>, L=C3=AA Th=E1=BB=8B Anh Th=C6=B0 <
+thub1606683@student.ctu.edu.vn>, L=C3=AA Th=E1=BB=8B M=E1=BB=B9 Duy=C3=AAn =
+<
+duyenb1600959@student.ctu.edu.vn>, L=C3=AA Th=E1=BB=8B Th=C3=B9y Nguy=C3=AA=
+n <
+nguyenb1606493@student.ctu.edu.vn>, L=C3=AA Tu=E1=BA=A5n Anh <
+anhb1601022@student.ctu.edu.vn>, L=C3=AA V=C4=83n Tr=C3=AD <trib1701958@stu=
+dent.ctu.edu.vn>,
+L=C3=AA V=C5=A9 B=E1=BA=B1ng <Bangb1701912@student.ctu.edu.vn>, L=C6=B0u Mi=
+nh Ch=C3=A2u <
+chaub1603868@student.ctu.edu.vn>, Mai B=C3=A1 Thi=C3=AAn Ph=C6=B0=E1=BB=9Bc=
+ <
+phuocb1603924@student.ctu.edu.vn>, Mai Ng=E1=BB=8Dc T=C6=B0=E1=BB=9Dng Minh=
+ <
+minhb1605226@student.ctu.edu.vn>, Mai Th=E1=BB=8B C=E1=BA=A9m Ti=C3=AAn <
+tienb1505190@student.ctu.edu.vn>, Mai V=C5=A9 Di=E1=BB=87u Anh <
+anhb1700325@student.ctu.edu.vn>, Nguy=E1=BB=85n Anh B=E1=BA=B1ng <
+bangb1606777@student.ctu.edu.vn>, Nguy=E1=BB=85n B=E1=BA=A3o Ng=E1=BB=8Dc <
+ngocb1609833@student.ctu.edu.vn>, Nguy=E1=BB=85n Cao T=C3=A0i <
+taib1604212@student.ctu.edu.vn>, Nguy=E1=BB=85n Hi=E1=BA=BFu B=C3=ACnh <
+binhb1602746@student.ctu.edu.vn>, Nguy=E1=BB=85n Ho=C3=A0ng Anh T=C3=BA <
+tub1608827@student.ctu.edu.vn>, Nguy=E1=BB=85n Ho=C3=A0ng H=E1=BA=ADu <
+haub1605082@student.ctu.edu.vn>, Nguy=E1=BB=85n Ho=C3=A0ng Ph=C3=BAc Th=E1=
+=BB=8Bnh <
+Thinhb1811897@student.ctu.edu.vn>, Nguy=E1=BB=85n Ho=C3=A0ng Trung <
+trungb1600412@student.ctu.edu.vn>, Nguy=E1=BB=85n Ho=C3=A0ng T=C3=ADnh <
+cuongb1605140@student.ctu.edu.vn>, Nguy=E1=BB=85n Hu=E1=BB=B3nh =C4=90=E1=
+=BB=A9c <
+ducb1705098@student.ctu.edu.vn>, Nguy=E1=BB=85n H=E1=BB=93ng Th=C3=A1i <
+thaib1600797@student.ctu.edu.vn>, Nguy=E1=BB=85n H=E1=BB=AFu C=E1=BA=A3nh <
+canhb1705078@student.ctu.edu.vn>, Nguy=E1=BB=85n H=E1=BB=AFu Ngh=C4=A9a <
+Nghiab1700481@student.ctu.edu.vn>, Nguy=E1=BB=85n H=E1=BB=AFu =C4=90=E1=BB=
+=A9c T=C3=B4n <
+tonb1700358@student.ctu.edu.vn>, Nguy=E1=BB=85n Kh=C3=A1nh Dung <
+dungb1603774@student.ctu.edu.vn>, Nguy=E1=BB=85n Kh=E1=BA=AFc Tho=E1=BA=A1i=
+ <
+thoaib1509538@student.ctu.edu.vn>, Nguy=E1=BB=85n L=E1=BB=99c Ninh <
+ninhb1602708@student.ctu.edu.vn>, Nguy=E1=BB=85n Ng=E1=BB=8Dc Thy Thy <
+thyb1504486@student.ctu.edu.vn>, Nguy=E1=BB=85n Nh=E1=BB=B1t T=C6=B0=E1=BB=
+=9Dng <
+Tuongb1604946@student.ctu.edu.vn>, Nguy=E1=BB=85n Phan Vi=E1=BB=87t Anh <
+anhb1408992@student.ctu.edu.vn>, Nguy=E1=BB=85n Ph=C6=B0=C6=A1ng Quang <
+quangB1510458@student.ctu.edu.vn>, Nguy=E1=BB=85n Qu=E1=BB=91c Kh=C3=A1nh <
+khanhb1505066@student.ctu.edu.vn>, Nguy=E1=BB=85n Thanh H=C3=B2a <
+hoab1608786@student.ctu.edu.vn>, Nguy=E1=BB=85n Thanh Nhu=E1=BA=ADn <
+nhuanb1600391@student.ctu.edu.vn>, Nguy=E1=BB=85n Thi=E1=BB=87n Tr=C3=AD <
+TriB1605610@student.ctu.edu.vn>, Nguy=E1=BB=85n Th=C3=A1i H=E1=BB=8Dc <
+hocb1507366@student.ctu.edu.vn>, Nguy=E1=BB=85n Th=E1=BB=8B Anh Th=C6=B0 <
+thuB1607544@student.ctu.edu.vn>, Nguy=E1=BB=85n Th=E1=BB=8B Hu=E1=BB=B3nh N=
+h=C6=B0 <
+nhub1608806@student.ctu.edu.vn>, Nguy=E1=BB=85n Th=E1=BB=8B H=E1=BB=93ng Th=
+=E1=BA=A3o <
+thaob1506969@student.ctu.edu.vn>, Nguy=E1=BB=85n Th=E1=BB=8B Ng=E1=BB=8Dc H=
+=C6=B0=E1=BB=A1ng <
+huongb1607234@student.ctu.edu.vn>, Nguy=E1=BB=85n Th=E1=BB=8B Ng=E1=BB=8Dc =
+Tr=C3=A2n <
+tranb1602065@student.ctu.edu.vn>, Nguy=E1=BB=85n Th=E1=BB=8B Ph=C6=B0=C6=A1=
+ng Th=E1=BA=A3o <
+thaob1601065@student.ctu.edu.vn>, Nguy=E1=BB=85n Th=E1=BB=8B T=C3=BA Anh <
+anhb1505439@student.ctu.edu.vn>, Nguy=E1=BB=85n Th=E1=BB=8B Y=E1=BA=BFn Nhi=
+ <
+nhib1608750@student.ctu.edu.vn>, Nguy=E1=BB=85n Tr=C3=AD Th=E1=BB=A9c <
+thucb1602723@student.ctu.edu.vn>, Nguy=E1=BB=85n Tr=E1=BB=8Dng B=E1=BA=B1ng=
+ <
+bangb1509429@student.ctu.edu.vn>, Nguy=E1=BB=85n Tr=E1=BB=8Dng =C4=90=E1=BB=
+=A9c <
+ducb1610530@student.ctu.edu.vn>, Nguy=E1=BB=85n V=C4=83n Huynh <
+huynhb1604960@student.ctu.edu.vn>, Nguy=E1=BB=85n V=C4=83n L=E1=BB=A3i <
+loib1603806@student.ctu.edu.vn>, Nguy=E1=BB=85n V=C4=83n L=E1=BB=A3i <
+Loib1606817@student.ctu.edu.vn>, Nguy=E1=BB=85n =C4=90=C4=83ng Khoa <
+khoab1604097@student.ctu.edu.vn>, Phan Cao K=E1=BB=B3 <kyb1506005@student.c=
+tu.edu.vn>,
+Phan Ch=C3=AD Nguy=E1=BB=87n <nguyenb1607374@student.ctu.edu.vn>, Phan L=C3=
+=AA Thanh Nh=C3=A3 <
+nhab1600779@student.ctu.edu.vn>, Ph=E1=BA=A1m Ch=C3=AD Thi=E1=BB=87n <
+thienb1604986@student.ctu.edu.vn>, Ph=E1=BA=A1m Ho=C3=A0ng Kh=E1=BA=A3 T=C3=
+=BA <
+tub1605130@student.ctu.edu.vn>, Ph=E1=BA=A1m Hu=E1=BB=B3nh Lan Ph=C6=B0=C6=
+=A1ng <
+phuongB1600452@student.ctu.edu.vn>, Ph=E1=BA=A1m H=E1=BB=93ng Ch=C6=B0=C6=
+=A1ng <
+ChuongB1506932@student.ctu.edu.vn>, Ph=E1=BA=A1m H=E1=BB=93ng Th=C3=A1i <
+thaib1608760@student.ctu.edu.vn>, Ph=E1=BA=A1m Th=E1=BB=8B Chinh <
+chinhb1602076@student.ctu.edu.vn>, Ph=E1=BA=A1m Th=E1=BB=8B H=E1=BA=A3i Ngh=
+i <
+nghib1604338@student.ctu.edu.vn>, Ph=E1=BA=A1m Th=E1=BB=8B Kim Anh <
+anhb1605133@student.ctu.edu.vn>, Ph=E1=BA=A1m Th=E1=BB=8B Kim Trung <
+Trungb1605540@student.ctu.edu.vn>, Ph=E1=BA=A1m V=C4=83n D=C5=A9 <
+dub1604749@student.ctu.edu.vn>, Ph=E1=BA=A1m V=C4=83n Hi=E1=BB=81n <
+hienb1704986@student.ctu.edu.vn>, Ph=E1=BA=A1m V=C4=83n Truy=E1=BB=81n <
+truyenb1701959@student.ctu.edu.vn>, Ph=E1=BA=A1m =C4=90o=C3=A0n M=E1=BB=B9 =
+Ng=E1=BB=8Dc <
+ngocb1605099@student.ctu.edu.vn>, Th=C3=A1i Ch=C3=AD Phong <
+phongb1603823@student.ctu.edu.vn>, Tr=C3=ACnh Th=E1=BB=8B Thanh Th=C6=B0=C6=
+=A1ng <
+thuongb1606515@student.ctu.edu.vn>, Tr=C6=B0=C6=A1ng H=E1=BB=93 M=E1=BB=B9 =
+Ph=C3=BAc <
+phucb1601856@student.ctu.edu.vn>, Tr=C6=B0=C6=A1ng Kh=C3=A1nh Nguy=C3=AAn <
+nguyenb1500750@student.ctu.edu.vn>, Tr=C6=B0=C6=A1ng Nguy=E1=BB=85n Th=C3=
+=B9y Linh <
+linhb1608354@student.ctu.edu.vn>, Tr=C6=B0=C6=A1ng Th=E1=BB=8B Th=C3=BAy Ng=
+uy=C3=AAn <
+nguyenb1603913@student.ctu.edu.vn>, Tr=C6=B0=C6=A1ng =C4=90=E1=BA=A1i D=C5=
+=A9ng <
+dungb1504515@student.ctu.edu.vn>, Tr=E1=BA=A7n Ho=C3=A0ng T=C3=ADnh <
+tinhb1707885@student.ctu.edu.vn>, Tr=E1=BA=A7n Ho=C3=A0ng =C4=90ang Th=C6=
+=B0 <
+thub1607924@student.ctu.edu.vn>, Tr=E1=BA=A7n Khoa Nguy=C3=AAn <
+NguyenB1603816@student.ctu.edu.vn>, Tr=E1=BA=A7n M=E1=BB=B9 Ti=C3=AAn <
+tienb1608067@student.ctu.edu.vn>, Tr=E1=BA=A7n Ng=E1=BB=8Dc Tr=C3=A2n <
+tranb1603603@student.ctu.edu.vn>, Tr=E1=BA=A7n Qu=E1=BB=91c K=C3=ADnh <
+kinhb1503412@student.ctu.edu.vn>, Tr=E1=BA=A7n Qu=E1=BB=91c To=C3=A0n <
+toanb1408440@student.ctu.edu.vn>, Tr=E1=BA=A7n Thanh Gi=C3=A1m <
+giamb1602021@student.ctu.edu.vn>, Tr=E1=BA=A7n Thanh Tr=C3=BAc <
+trucb1506981@student.ctu.edu.vn>, Tr=E1=BA=A7n Th=E1=BB=8B Ng=E1=BB=8Dc Ch=
+=C3=A2u <
+chaub1605071@student.ctu.edu.vn>, Tr=E1=BA=A7n Th=E1=BB=8B Thanh T=C3=A2m <
+tamb1506023@student.ctu.edu.vn>, Tr=E1=BA=A7n Th=E1=BB=8B Thi=E1=BB=87n <
+thienb1604987@student.ctu.edu.vn>, Tr=E1=BA=A7n T=C3=BA Trinh <
+trinhb1600471@student.ctu.edu.vn>, Tr=E1=BA=A7n V=C4=83n Ngo=C3=A3n <
+ngoanb1607007@student.ctu.edu.vn>, Tr=E1=BA=A7n V=C4=83n T=E1=BA=A5n <
+tanb1505968@student.ctu.edu.vn>, Tr=E1=BB=8Bnh Gia H=C6=B0ng <
+hungb1603793@student.ctu.edu.vn>, T=E1=BB=91ng Minh =C4=90=E1=BB=A9c <
+ducb1608292@student.ctu.edu.vn>, V=C3=B5 Ho=C3=A0ng H=C6=B0ng <
+hungb1603794@student.ctu.edu.vn>, V=C3=B5 L=C3=AA Tr=C3=BAc Lam <
+lamb1609868@student.ctu.edu.vn>, V=C3=B5 Nguy=E1=BB=85n Minh Hi=E1=BA=BFu <
+hieub1609966@student.ctu.edu.vn>, V=C3=B5 Ph=C3=BA Qu=C3=AD <quib1601209@st=
+udent.ctu.edu.vn>,
+V=C3=B5 Th=E1=BA=BF An <anb1606455@student.ctu.edu.vn>, V=C3=B5 V=C4=83n Ng=
+oan <
+ngoanb1604424@student.ctu.edu.vn>, V=C4=83n T=C3=A2n D=C6=B0=C6=A1ng <
+duongb1705088@student.ctu.edu.vn>, =C4=90o=C3=A0n Ho=C3=A0ng Th=E1=BB=8Bnh =
+<
+thinhb1509414@student.ctu.edu.vn>, =C4=90=C3=A0o V=C5=A9 H=C6=B0=C6=A1ng Gi=
+ang <
+giangb1409969@student.ctu.edu.vn>, =C4=90=E1=BA=B7ng Nh=C6=B0 =C3=9D <yb170=
+1801@student.ctu.edu.vn>,
+=C4=90=E1=BA=B7ng Thanh Danh <danhb1606202@student.ctu.edu.vn>, =C4=90=E1=
+=BA=B7ng T=E1=BA=A5n =C4=90=E1=BA=A3m <
+damb1710388@student.ctu.edu.vn>, =C4=90=E1=BA=B7ng V=C4=83n Ph=C3=A1p <
+phapb1605755@student.ctu.edu.vn>, =C4=90=E1=BB=97 Minh Huy <
+huyb1504442@student.ctu.edu.vn>
+Cc: Do Thanh Nghi 001072 <dtnghi@ctu.edu.vn>, Le Binh Minh 2384 <
+lbminh@ctu.edu.vn>, Le Van Du 1500 <lvdu@ctu.edu.vn>, Nguyen Van Ay (CTU) <
+nvay@ctu.edu.vn>, Tran Huu Danh 001452 <thdanh@ctu.edu.vn>, Bui Anh Tuan
+001725 <batuan@ctu.edu.vn>, Bui Hoang Dang Long 009724 <bhdlong@ctu.edu.vn>=
+,
+Bui Hoang Tan 002614 <bhtan@ctu.edu.vn>, Bui Le Anh Tuan 001916 <
+blatuan@ctu.edu.vn>, Bui Thanh Thao 001607 <btthao@ctu.edu.vn>, Cu Ngoc
+Thang 002350 <cnthang@ctu.edu.vn>, Dai Thi Xuan Trang 001040 <
+dtxtrang@ctu.edu.vn>, Dang Huynh Giao 001807 <dhgiao@ctu.edu.vn>, Dang Minh
+Triet 002097 <dmtriet@ctu.edu.vn>, Dang Tram Anh 001008 <dtanh@ctu.edu.vn>,
+Dao Ngoc Canh <dncanh@ctu.edu.vn>, Diep Kien Vu 000841 <dkvu@ctu.edu.vn>,
+Dinh Minh Quang 002002 <dmquang@ctu.edu.vn>, Do Tan Khang 008936 <
+dtkhang@ctu.edu.vn>, Do Thi Xuan 008463 <dtxuan@ctu.edu.vn>, Ho Thanh Tham
+002163 <httham@ctu.edu.vn>, Hua Hong Hieu 008404 <hhhieu@ctu.edu.vn>, Huynh
+Ngoc Thanh Tam 001768 <hnttam@ctu.edu.vn>, Huynh Ngoc Trang 008844 <
+hntrang@ctu.edu.vn>, Huynh Thanh Toi 008144 <httoi@ctu.edu.vn>, Huynh Thi
+Thu Huong 001273 <htthuong@ctu.edu.vn>, Huynh Thi Thuy Diem 000107 <
+httdiem@ctu.edu.vn>, Huynh Trong Phuoc 002507 <htphuoc@ctu.edu.vn>, Huynh
+Truong Giang 008680 <htgiang@ctu.edu.vn>, Huynh Van Da 001851 <
+hvda@ctu.edu.vn>, Huynh Xuan Phong (CTU) <hxphong@ctu.edu.vn>, Khang Pham
+Nguyen <pnkhang@cit.ctu.edu.vn>, Khuu Ngoc Huyen 002710 <knhuyen@ctu.edu.vn=
+>,
+Kim Lavane 001669 <klavane@ctu.edu.vn>, La Nguyen Thuy Dung (CTU) <
+lntdung@ctu.edu.vn>, Lam Hoang Chuong 002084 <lhchuong@ctu.edu.vn>, Lam
+Quoc Anh <quocanh@ctu.edu.vn>, Le Canh Dung 000775 <lcdung@ctu.edu.vn>, Le
+Gia Lam 001622 <lglam@ctu.edu.vn>, Le Kim Thanh <lkthanh@ctu.edu.vn>, Le
+Minh Tuong 002398 <lmtuong@ctu.edu.vn>, Le Nong 001677 <lenong@ctu.edu.vn>,
+Le Thanh Phuoc (CTU) <ltphuoc@ctu.edu.vn>, Le Thi Bach 001135 <
+ltbach@ctu.edu.vn>, Le Thi Minh Thuy (CTU) <ltmthuy@ctu.edu.vn>, Le Thi Thu
+Trang <ltttrang@ctu.edu.vn>, Le Thi To Quyen 002485 <lttquyen@ctu.edu.vn>,
+Le Van Khoa 000284 <lvkhoa@ctu.edu.vn>, Luong Huynh Vu Thanh 002229 <
+lhvthanh@ctu.edu.vn>, Ly Thi Lien Khai (CTU) <ltlkhai@ctu.edu.vn>, Minh
+Thai TRUONG <tmthai@ctu.edu.vn>, Ngo Ba Hung 001124 <nbhung@ctu.edu.vn>,
+Ngo Quoc Luan 001534 <ngoquocluan@ctu.edu.vn>, Ngo Thanh Phong (CTU) <
+ngophong@ctu.edu.vn>, Ngo Thi Phuong Dung (CTU) <ntpdung@ctu.edu.vn>, Ngo
+Thuy Diem Trang 002359 <ntdtrang@ctu.edu.vn>, Ngo Truong Ngoc Mai 001765 <
+ntnmai@ctu.edu.vn>, Nguyen Anh Duy 001928 <naduy@ctu.edu.vn>, Nguyen Chanh
+Nghiem 001941 <ncnghiem@ctu.edu.vn>, Nguyen Chi Ngon (CTU) <
+ncngon@ctu.edu.vn>, Nguyen Cong Thuan 002440 <ncthuan@ctu.edu.vn>, Nguyen
+Dien Trung 002314 <ndtrung@ctu.edu.vn>, Nguyen Dinh Giang Nam (CTU) <
+ndgnam@ctu.edu.vn>, Nguyen Hoang Dung <hoangdung@ctu.edu.vn>, Nguyen Hong
+Nam (CTU) <nhnam@ctu.edu.vn>, Nguyen Huu Hiep 000742 <nhhiep@ctu.edu.vn>,
+Nguyen Ngoc My <nnmy@cit.ctu.edu.vn>, Nguyen Pham Anh Thi 002774 <
+npathi@ctu.edu.vn>, Nguyen Thai Son 002156 <thaison@ctu.edu.vn>, Nguyen
+Thanh Giao 002783 <ntgiao@ctu.edu.vn>, Nguyen Thi Bach Kim 002462 <
+ntbkim@ctu.edu.vn>, Nguyen Thi Be Ba 002672 <ntbba@ctu.edu.vn>, Nguyen Thi
+Bich Thuyen 001683 <ntbthuyen@ctu.edu.vn>, Nguyen Thi Ha 002103 <
+ntha@ctu.edu.vn>, Nguyen Thi Hong Dan 002225 <nthdan@ctu.edu.vn>, Nguyen
+Thi Hong Diep 001289 <nthdiep@ctu.edu.vn>, Nguyen Thi Hong-002243 002243 <
+nthong43@ctu.edu.vn>, Nguyen Thi Kieu Oanh 002486 <kieuoanh@ctu.edu.vn>,
+Nguyen Thi Kim Chi 001250 <chinguyen@ctu.edu.vn>, Nguyen Thi Le Thuy 002056
+<ntlethuy@ctu.edu.vn>, Nguyen Thi Lien 001890 <ntlien@ctu.edu.vn>, Nguyen
+Thi Pha 001769 <ntpha@ctu.edu.vn>, Nguyen Thu Tam 002251 <nttamty@ctu.edu.v=
+n>,
+Nguyen Tri Tuan 001076 <trituan@ctu.edu.vn>, Nguyen Trong Hong Phuc 002001 =
+<
+nthphuc@ctu.edu.vn>, Nguyen Trung Kien 002236 <trungkien@ctu.edu.vn>,
+Nguyen Truong Thanh 001681 <ntthanh@ctu.edu.vn>, Nguyen Van Tron 002589 <
+nvtron@ctu.edu.vn>, Nguyen Vo Chau Ngan 001297 <nvcngan@ctu.edu.vn>, Nguyen
+Xuan Hoang 001246 <nxhoang@ctu.edu.vn>, Pham Anh Du 001822 <padu@ctu.edu.vn=
+>,
+Pham Huu Ha Giang 001808 <phhgiang@ctu.edu.vn>, Pham Nguyen Hoang 002640 <
+pnhoang@ctu.edu.vn>, Pham Thanh Vu 001407 <ptvu@ctu.edu.vn>, Pham Thi
+Phuong Thao <ptpthao@ctu.edu.vn>, Pham Thi Vui 001724 <ptvui@ctu.edu.vn>,
+Pham Van Trong Tinh 002478 <pvttinh@ctu.edu.vn>, Pham Viet Nu 002206 <
+pvnu@ctu.edu.vn>, Phan Kieu Diem 008796 <pkdiem@ctu.edu.vn>, Phan Kim Dinh
+000027 <pkdinh@ctu.edu.vn>, Phan Thanh Thuan <ptthuan@ctu.edu.vn>, Phan
+Viet Thang 002245 <vietthang@ctu.edu.vn>, Phuong Hoang Yen 001464 <
+phyen@ctu.edu.vn>, Thieu Quang Quoc Viet <tqqviet@ctu.edu.vn>, Tran Ba Linh
+001406 <tblinh@ctu.edu.vn>, Tran Minh Phu <tmphu@ctu.edu.vn>, Tran Minh Tan
+<tmtan@ctu.edu.vn>, Tran Minh Thuan (CTU) <tranminhkc@ctu.edu.vn>, Tran
+Ngoc Hai 000273 <tnhai@ctu.edu.vn>, Tran Nguyen Phuong Lan 002274 <
+tnplan@ctu.edu.vn>, Tran Nhut Khai Hoan <tnkhoan@ctu.edu.vn>, Tran Quang De
+001743 <tqde@ctu.edu.vn>, Tran Thanh Hung 001064 <tthung@ctu.edu.vn>, Tran
+Thanh Men <ttmen@ctu.edu.vn>, Tran Thi Bach Yen 2279 <ttbyen@ctu.edu.vn>,
+Tran Thi Diem Can 002505 <ttdcan@ctu.edu.vn>, Tran Thi Kim Hong 001387 <
+ttkhong@ctu.edu.vn>, Tran Thi Phuong 001926 <ttphuong@ctu.edu.vn>, Tran Thi
+Thanh Khuong 002773 <tttkhuong@ctu.edu.vn>, Tran Thi Tuyet Hoa 001796 <
+ttthoa@ctu.edu.vn>, Tran Van Dung 001405 <tvandung@ctu.edu.vn>, Tran Van
+Hieu 000707 <tvhieu@ctu.edu.vn>, TRan Van Hung (CTU) <tvanhung@ctu.edu.vn>,
+Tran Vu An 001812 <tranvuan@ctu.edu.vn>, Truong Chi Quang <
+tcquang@ctu.edu.vn>, Truong Hoang Dan (CTU) <thdan@ctu.edu.vn>, Truong Thi
+Bich Van 008481 <ttbvan@ctu.edu.vn>, Truong Thi Thanh Tuyen 001068 <
+ttttuyen@ctu.edu.vn>, Van Ly Tran <tvly@ctu.edu.vn>, Van Pham Dang Tri
+(CTU) <vpdtri@ctu.edu.vn>, Vo Phuong Quyen 001466 <vpquyen@ctu.edu.vn>, Vo
+Quang Minh (CTU) <vqminh@ctu.edu.vn>, Vo Quoc Tuan 008466 <vqtuan@ctu.edu.v=
+n>,
+Vo Thi Phuong Linh 002643 <vtplinh@ctu.edu.vn>, Vo Van Dau 001685 <
+vvdau@ctu.edu.vn>, Vo Van Song Toan 002338 <vvstoan@ctu.edu.vn>, vvtai <
+vvtai@ctu.edu.vn>, Tran Thi Kim Chi 002793 <ttkchi@ctu.edu.vn>
+
+
+C=C3=A1c em sinh vi=C3=AAn th=C3=A2n m=E1=BA=BFn !
+Cc: qu=C3=BD Th=E1=BA=A7y C=C3=B4 l=C3=A0 CBHD !
+
+C=C3=A1c em =C4=91=C3=A3 t=E1=BA=A1m =E1=BB=A9ng kinh ph=C3=AD th=E1=BB=B1c=
+ hi=E1=BB=87n =C4=91=E1=BB=81 t=C3=A0i =C4=91=E1=BB=A3t 1 r=E1=BB=93i,
+c=C3=A1c em tri=E1=BB=83n khai =C4=91=E1=BB=81 t=C3=A0i theo ti=E1=BA=BFn =
+=C4=91=E1=BB=99 trong thuy=E1=BA=BFt minh
+v=C3=A0 ti=E1=BA=BFn h=C3=A0nh thanh to=C3=A1n kinh ph=C3=AD =C4=91=C3=A3 t=
+=E1=BA=A1m =E1=BB=A9ng khi c=C3=B3 =C4=91=E1=BA=A7y =C4=91=E1=BB=A7
+c=C3=A1c ch=E1=BB=A9ng t=E1=BB=AB li=C3=AAn quan v=C3=A0 t=E1=BA=A1m =E1=BB=
+=A9ng ph=E1=BA=A7n kinh ph=C3=AD c=C3=B2n l=E1=BA=A1i
+
+=C4=91=E1=BB=83 ti=E1=BA=BFp t=E1=BB=A5c tri=E1=BB=83n khai, nghi=E1=BB=87m=
+ thu =C4=91=E1=BB=81 t=C3=A0i.
+
+=C4=90=E1=BB=81 t=C3=A0i c=E1=BB=A7a c=C3=A1c em s=E1=BA=BD nghi=E1=BB=87m =
+thu ch=E1=BA=ADm nh=E1=BA=A5t l=C3=A0 31/10/2019.
+
+
+H=E1=BB=93 s=C6=A1 thanh to=C3=A1n g=E1=BB=93m:
+
+(1) Gi=E1=BA=A5y =C4=91=E1=BB=81 ngh=E1=BB=8B thanh to=C3=A1n: in 01 b=E1=
+=BA=A3n.
+(2) B=E1=BA=A3ng k=C3=AA ch=E1=BB=A9ng t=E1=BB=AB thanh to=C3=A1n: in 01 b=
+=E1=BA=A3n.
+
+(3) B=E1=BA=A3ng k=C3=AA kh=E1=BB=91i l=C6=B0=E1=BB=A3ng c=C3=B4ng vi=E1=BB=
+=87c =C4=91=C3=A3 th=E1=BB=B1c hi=E1=BB=87n:
+in 02 b=E1=BA=A3n, ch=E1=BB=89 y=C3=AAu c=E1=BA=A7u ch=E1=BB=A7 nhi=E1=BB=
+=87m =C4=91=E1=BB=81 t=C3=A0i k=C3=BD t=C3=AAn =E1=BB=9F trang 02,
+c=C3=A1c ch=E1=BB=AF k=C3=BD c=C3=B2n l=E1=BA=A1i =E1=BB=9F trang 02 v=C3=
+=A0 trang 03, Ph=C3=B2ng QLKH v=C3=A0 Ph=C3=B2ng T=C3=A0i ch=C3=ADnh s=E1=
+=BA=BD
+tr=C3=ACnh k=C3=BD,
+
+trang 3 =C4=91=C6=B0=E1=BB=A3c in tr=C3=AAn 01 t=E1=BB=9D A4 =C4=91=E1=BB=
+=99c l=E1=BA=ADp.
+
+(4) C=C3=A1c ch=E1=BB=A9ng t=E1=BB=AB li=C3=AAn quan theo d=E1=BB=B1 to=C3=
+=A1n kinh ph=C3=AD.
+
+(5) Gi=E1=BA=A5y =C4=91=E1=BB=81 ngh=E1=BB=8B t=E1=BA=A1m =E1=BB=A9ng kinh =
+ph=C3=AD (n=E1=BA=BFu c=C3=B3).
+
+T=E1=BA=A5t c=E1=BA=A3 c=C3=A1c bi=E1=BB=83u m=E1=BA=ABu n=C3=A0y anh =C4=
+=91=C3=A3 g=E1=BB=ADi cho c=C3=A1c em khi th=E1=BB=B1c hi=E1=BB=87n th=E1=
+=BB=A7 t=E1=BB=A5c k=C3=BD h=E1=BB=A3p
+=C4=91=E1=BB=93ng.
+Thanh to=C3=A1n kinh ph=C3=AD l=E1=BA=A7n 2 =C4=91=C6=B0=E1=BB=A3c th=E1=BB=
+=B1c hi=E1=BB=87n sau khi nghi=E1=BB=87m thu xong =C4=91=E1=BB=81 t=C3=A0i.
+
+
+Trong qu=C3=A1 tr=C3=ACnh l=C3=A0m h=E1=BB=93 s=C6=A1 thanh to=C3=A1n, c=C3=
+=A1c em c=E1=BA=A7n =C4=91=E1=BA=BFn Ph=C3=B2ng T=C3=A0i ch=C3=ADnh
+g=E1=BA=B7p c=C3=B4 Chi =C4=91=E1=BB=83 =C4=91=C6=B0=E1=BB=A3c h=C6=B0=E1=
+=BB=9Bng d=E1=BA=ABn v=C3=A0 xem tr=C6=B0=E1=BB=9Bc c=C3=A1c h=E1=BB=93 s=
+=C6=A1.
+Khi h=E1=BB=93 s=C6=A1 =C4=91=C3=A3 =C4=91=C3=BAng r=E1=BB=93i c=C3=A1c em =
+mang h=E1=BB=93 s=C6=A1 =C4=91=E1=BA=BFn n=E1=BB=99p cho anh T=E1=BA=A5n =
+=E1=BB=9F L=E1=BA=A7u 5 - Nh=C3=A0
+=C4=90i=E1=BB=81u h=C3=A0nh,
+anh s=E1=BA=BD tr=C3=ACnh k=C3=BD =C4=91=E1=BB=83 c=C3=A1c em =C4=91i thanh=
+ to=C3=A1n.
+
+Th=C3=A2n ch=C3=A0o c=C3=A1c em.
+---------------------------
+Nguy=E1=BB=85n V=C4=83n T=E1=BA=A5n
+Ph=C3=B2ng Qu=E1=BA=A3n l=C3=BD Khoa h=E1=BB=8Dc
+Tr=C6=B0=E1=BB=9Dng =C4=90=E1=BA=A1i h=E1=BB=8Dc C=E1=BA=A7n Th=C6=A1.
+V=C3=B9ng t=E1=BB=87p =C4=91=C3=ADnh k=C3=A8m
+
+--000000000000def58505932fb71b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=
+=3D"gmail_attr">---------- Forwarded message ---------<br>T=E1=BB=AB: <stro=
+ng class=3D"gmail_sendername" dir=3D"auto">Nguyen Van Tan 002024</strong> <=
+span dir=3D"auto">&lt;<a href=3D"mailto:nguyentan@ctu.edu.vn">nguyentan@ctu=
+.edu.vn</a>&gt;</span><br>Date: Th 2, 23 thg 9, 2019 va=CC=80o lu=CC=81c 09=
+:59<br>Subject: Thanh to=C3=A1n kinh ph=C3=AD =C4=91=E1=BB=81 t=C3=A0i NCKH=
+ SV 2019<br>To: Bui Doan Thanh Tuyen B1706350 &lt;<a href=3D"mailto:tuyenb1=
+706350@student.ctu.edu.vn">tuyenb1706350@student.ctu.edu.vn</a>&gt;, B=C3=
+=B9i Ho=C3=A0ng Thu Trang &lt;<a href=3D"mailto:trangb1703444@student.ctu.e=
+du.vn">trangb1703444@student.ctu.edu.vn</a>&gt;, B=C3=B9i Hu=E1=BB=B3nh Li=
+=C3=AAn &lt;<a href=3D"mailto:lienb1605156@student.ctu.edu.vn">lienb1605156=
+@student.ctu.edu.vn</a>&gt;, B=C3=B9i Quang Huy &lt;<a href=3D"mailto:huyb1=
+503552@student.ctu.edu.vn">huyb1503552@student.ctu.edu.vn</a>&gt;, Cao Trun=
+g Hi=E1=BA=BFu &lt;<a href=3D"mailto:hieub1503377@student.ctu.edu.vn">hieub=
+1503377@student.ctu.edu.vn</a>&gt;, Cao V=C4=83n T=E1=BB=A9 &lt;<a href=3D"=
+mailto:tub1605541@student.ctu.edu.vn">tub1605541@student.ctu.edu.vn</a>&gt;=
+, Chanh B=C3=B4 Ry &lt;<a href=3D"mailto:ryb1608655@student.ctu.edu.vn">ryb=
+1608655@student.ctu.edu.vn</a>&gt;, D=C6=B0=C6=A1ng H=E1=BB=AFu H=E1=BA=A1n=
+h &lt;<a href=3D"mailto:hanhb1504288@student.ctu.edu.vn">hanhb1504288@stude=
+nt.ctu.edu.vn</a>&gt;, D=C6=B0=C6=A1ng Nguy=E1=BB=85n H=C3=A0 M=E1=BB=B9 Xu=
+y=C3=AAn &lt;<a href=3D"mailto:xuyenb1605132@student.ctu.edu.vn">xuyenb1605=
+132@student.ctu.edu.vn</a>&gt;, D=C6=B0=C6=A1ng Nh=E1=BB=B1t Duy &lt;<a hre=
+f=3D"mailto:duyb1605075@student.ctu.edu.vn">duyb1605075@student.ctu.edu.vn<=
+/a>&gt;, D=C6=B0=C6=A1ng Ph=E1=BA=A1m Quang Th=C3=B4ng &lt;<a href=3D"mailt=
+o:thongb1509482@student.ctu.edu.vn">thongb1509482@student.ctu.edu.vn</a>&gt=
+;, D=C6=B0=C6=A1ng Qu=E1=BB=91c Tr=E1=BA=A1ng &lt;<a href=3D"mailto:trangb1=
+705242@student.ctu.edu.vn">trangb1705242@student.ctu.edu.vn</a>&gt;, D=C6=
+=B0=C6=A1ng Th=E1=BB=8B Linh Hu=E1=BB=87 &lt;<a href=3D"mailto:hueb1608092@=
+student.ctu.edu.vn">hueb1608092@student.ctu.edu.vn</a>&gt;, D=C6=B0=C6=A1ng=
+ Th=E1=BB=8B Y=E1=BA=BFn Nhi &lt;<a href=3D"mailto:nhib1604116@student.ctu.=
+edu.vn">nhib1604116@student.ctu.edu.vn</a>&gt;, Hu=E1=BB=B3nh M=E1=BA=A1nh =
+Ph=C3=A1t &lt;<a href=3D"mailto:Phatb1600045@student.ctu.edu.vn">Phatb16000=
+45@student.ctu.edu.vn</a>&gt;, Hu=E1=BB=B3nh Nh=C6=B0 Th=E1=BA=A3o &lt;<a h=
+ref=3D"mailto:thaob1604296@student.ctu.edu.vn">thaob1604296@student.ctu.edu=
+.vn</a>&gt;, Hu=E1=BB=B3nh Th=E1=BB=8B Ng=E1=BB=8Dc =C3=81nh &lt;<a href=3D=
+"mailto:anhb1604166@student.ctu.edu.vn">anhb1604166@student.ctu.edu.vn</a>&=
+gt;, Hu=E1=BB=B3nh Trang Th=C6=B0 &lt;<a href=3D"mailto:thub1606185@student=
+.ctu.edu.vn">thub1606185@student.ctu.edu.vn</a>&gt;, Hu=E1=BB=B3nh Trung Hi=
+=E1=BA=BFu &lt;<a href=3D"mailto:hieub1600644@student.ctu.edu.vn">hieub1600=
+644@student.ctu.edu.vn</a>&gt;, Hu=E1=BB=B3nh T=E1=BA=A5n L=E1=BB=99c &lt;<=
+a href=3D"mailto:Locb1605579@student.ctu.edu.vn">Locb1605579@student.ctu.ed=
+u.vn</a>&gt;, H=C3=A0 Qu=E1=BB=91c Nam &lt;<a href=3D"mailto:namb1506951@st=
+udent.ctu.edu.vn">namb1506951@student.ctu.edu.vn</a>&gt;, H=E1=BB=93 H=E1=
+=BB=ADu Kh=C3=A1nh &lt;<a href=3D"mailto:khanhb1605219@student.ctu.edu.vn">=
+khanhb1605219@student.ctu.edu.vn</a>&gt;, L=C3=AA B=E1=BA=B1ng Phi &lt;<a h=
+ref=3D"mailto:phib1509267@student.ctu.edu.vn">phib1509267@student.ctu.edu.v=
+n</a>&gt;, L=C3=AA Ho=C3=A0ng Ng=E1=BB=8Dc H=C3=A0 &lt;<a href=3D"mailto:ha=
+b1607650@student.ctu.edu.vn">hab1607650@student.ctu.edu.vn</a>&gt;, L=C3=AA=
+ H=E1=BB=AFu Ngh=C4=A9a &lt;<a href=3D"mailto:nghiab1600111@student.ctu.edu=
+.vn">nghiab1600111@student.ctu.edu.vn</a>&gt;, L=C3=AA H=E1=BB=AFu Th=E1=BB=
+=8Bnh &lt;<a href=3D"mailto:thinhb1605605@student.ctu.edu.vn">thinhb1605605=
+@student.ctu.edu.vn</a>&gt;, L=C3=AA Minh Hi=E1=BA=BFu &lt;<a href=3D"mailt=
+o:hieub1708049@student.ctu.edu.vn">hieub1708049@student.ctu.edu.vn</a>&gt;,=
+ L=C3=AA Nguy=E1=BB=85n Kh=C3=B4i Nguy=C3=AAn &lt;<a href=3D"mailto:nguyenb=
+1605166@student.ctu.edu.vn">nguyenb1605166@student.ctu.edu.vn</a>&gt;, L=C3=
+=AA Nguy=E1=BB=85n Minh Duy &lt;<a href=3D"mailto:duyb1500684@student.ctu.e=
+du.vn">duyb1500684@student.ctu.edu.vn</a>&gt;, L=C3=AA Nguy=E1=BB=85n Ph=C6=
+=B0=C6=A1ng Anh &lt;<a href=3D"mailto:anhb1605776@student.ctu.edu.vn">anhb1=
+605776@student.ctu.edu.vn</a>&gt;, L=C3=AA Ng=E1=BB=8Dc Long &lt;<a href=3D=
+"mailto:longb1705005@student.ctu.edu.vn">longb1705005@student.ctu.edu.vn</a=
+>&gt;, L=C3=AA Thanh Huy &lt;<a href=3D"mailto:Huyb1605569@student.ctu.edu.=
+vn">Huyb1605569@student.ctu.edu.vn</a>&gt;, L=C3=AA Thanh Khuy=E1=BA=BFn &l=
+t;<a href=3D"mailto:KhuyenB1605575@student.ctu.edu.vn">KhuyenB1605575@stude=
+nt.ctu.edu.vn</a>&gt;, L=C3=AA Th=C3=A0nh Nghi=E1=BB=87p &lt;<a href=3D"mai=
+lto:Nghiepb1610236@student.ctu.edu.vn">Nghiepb1610236@student.ctu.edu.vn</a=
+>&gt;, L=C3=AA Th=E1=BB=8B Anh Th=C6=B0 &lt;<a href=3D"mailto:thub1606683@s=
+tudent.ctu.edu.vn">thub1606683@student.ctu.edu.vn</a>&gt;, L=C3=AA Th=E1=BB=
+=8B M=E1=BB=B9 Duy=C3=AAn &lt;<a href=3D"mailto:duyenb1600959@student.ctu.e=
+du.vn">duyenb1600959@student.ctu.edu.vn</a>&gt;, L=C3=AA Th=E1=BB=8B Th=C3=
+=B9y Nguy=C3=AAn &lt;<a href=3D"mailto:nguyenb1606493@student.ctu.edu.vn">n=
+guyenb1606493@student.ctu.edu.vn</a>&gt;, L=C3=AA Tu=E1=BA=A5n Anh &lt;<a h=
+ref=3D"mailto:anhb1601022@student.ctu.edu.vn">anhb1601022@student.ctu.edu.v=
+n</a>&gt;, L=C3=AA V=C4=83n Tr=C3=AD &lt;<a href=3D"mailto:trib1701958@stud=
+ent.ctu.edu.vn">trib1701958@student.ctu.edu.vn</a>&gt;, L=C3=AA V=C5=A9 B=
+=E1=BA=B1ng &lt;<a href=3D"mailto:Bangb1701912@student.ctu.edu.vn">Bangb170=
+1912@student.ctu.edu.vn</a>&gt;, L=C6=B0u Minh Ch=C3=A2u &lt;<a href=3D"mai=
+lto:chaub1603868@student.ctu.edu.vn">chaub1603868@student.ctu.edu.vn</a>&gt=
+;, Mai B=C3=A1 Thi=C3=AAn Ph=C6=B0=E1=BB=9Bc &lt;<a href=3D"mailto:phuocb16=
+03924@student.ctu.edu.vn">phuocb1603924@student.ctu.edu.vn</a>&gt;, Mai Ng=
+=E1=BB=8Dc T=C6=B0=E1=BB=9Dng Minh &lt;<a href=3D"mailto:minhb1605226@stude=
+nt.ctu.edu.vn">minhb1605226@student.ctu.edu.vn</a>&gt;, Mai Th=E1=BB=8B C=
+=E1=BA=A9m Ti=C3=AAn &lt;<a href=3D"mailto:tienb1505190@student.ctu.edu.vn"=
+>tienb1505190@student.ctu.edu.vn</a>&gt;, Mai V=C5=A9 Di=E1=BB=87u Anh &lt;=
+<a href=3D"mailto:anhb1700325@student.ctu.edu.vn">anhb1700325@student.ctu.e=
+du.vn</a>&gt;, Nguy=E1=BB=85n Anh B=E1=BA=B1ng &lt;<a href=3D"mailto:bangb1=
+606777@student.ctu.edu.vn">bangb1606777@student.ctu.edu.vn</a>&gt;, Nguy=E1=
+=BB=85n B=E1=BA=A3o Ng=E1=BB=8Dc &lt;<a href=3D"mailto:ngocb1609833@student=
+.ctu.edu.vn">ngocb1609833@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Cao T=
+=C3=A0i &lt;<a href=3D"mailto:taib1604212@student.ctu.edu.vn">taib1604212@s=
+tudent.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Hi=E1=BA=BFu B=C3=ACnh &lt;<a hre=
+f=3D"mailto:binhb1602746@student.ctu.edu.vn">binhb1602746@student.ctu.edu.v=
+n</a>&gt;, Nguy=E1=BB=85n Ho=C3=A0ng Anh T=C3=BA &lt;<a href=3D"mailto:tub1=
+608827@student.ctu.edu.vn">tub1608827@student.ctu.edu.vn</a>&gt;, Nguy=E1=
+=BB=85n Ho=C3=A0ng H=E1=BA=ADu &lt;<a href=3D"mailto:haub1605082@student.ct=
+u.edu.vn">haub1605082@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Ho=C3=A0ng=
+ Ph=C3=BAc Th=E1=BB=8Bnh &lt;<a href=3D"mailto:Thinhb1811897@student.ctu.ed=
+u.vn">Thinhb1811897@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Ho=C3=A0ng T=
+rung &lt;<a href=3D"mailto:trungb1600412@student.ctu.edu.vn">trungb1600412@=
+student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Ho=C3=A0ng T=C3=ADnh &lt;<a href=
+=3D"mailto:cuongb1605140@student.ctu.edu.vn">cuongb1605140@student.ctu.edu.=
+vn</a>&gt;, Nguy=E1=BB=85n Hu=E1=BB=B3nh =C4=90=E1=BB=A9c &lt;<a href=3D"ma=
+ilto:ducb1705098@student.ctu.edu.vn">ducb1705098@student.ctu.edu.vn</a>&gt;=
+, Nguy=E1=BB=85n H=E1=BB=93ng Th=C3=A1i &lt;<a href=3D"mailto:thaib1600797@=
+student.ctu.edu.vn">thaib1600797@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n=
+ H=E1=BB=AFu C=E1=BA=A3nh &lt;<a href=3D"mailto:canhb1705078@student.ctu.ed=
+u.vn">canhb1705078@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n H=E1=BB=AFu N=
+gh=C4=A9a &lt;<a href=3D"mailto:Nghiab1700481@student.ctu.edu.vn">Nghiab170=
+0481@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n H=E1=BB=AFu =C4=90=E1=BB=A9=
+c T=C3=B4n &lt;<a href=3D"mailto:tonb1700358@student.ctu.edu.vn">tonb170035=
+8@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Kh=C3=A1nh Dung &lt;<a href=3D=
+"mailto:dungb1603774@student.ctu.edu.vn">dungb1603774@student.ctu.edu.vn</a=
+>&gt;, Nguy=E1=BB=85n Kh=E1=BA=AFc Tho=E1=BA=A1i &lt;<a href=3D"mailto:thoa=
+ib1509538@student.ctu.edu.vn">thoaib1509538@student.ctu.edu.vn</a>&gt;, Ngu=
+y=E1=BB=85n L=E1=BB=99c Ninh &lt;<a href=3D"mailto:ninhb1602708@student.ctu=
+.edu.vn">ninhb1602708@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Ng=E1=BB=
+=8Dc Thy Thy &lt;<a href=3D"mailto:thyb1504486@student.ctu.edu.vn">thyb1504=
+486@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Nh=E1=BB=B1t T=C6=B0=E1=BB=
+=9Dng &lt;<a href=3D"mailto:Tuongb1604946@student.ctu.edu.vn">Tuongb1604946=
+@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Phan Vi=E1=BB=87t Anh &lt;<a hr=
+ef=3D"mailto:anhb1408992@student.ctu.edu.vn">anhb1408992@student.ctu.edu.vn=
+</a>&gt;, Nguy=E1=BB=85n Ph=C6=B0=C6=A1ng Quang &lt;<a href=3D"mailto:quang=
+B1510458@student.ctu.edu.vn">quangB1510458@student.ctu.edu.vn</a>&gt;, Nguy=
+=E1=BB=85n Qu=E1=BB=91c Kh=C3=A1nh &lt;<a href=3D"mailto:khanhb1505066@stud=
+ent.ctu.edu.vn">khanhb1505066@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Th=
+anh H=C3=B2a &lt;<a href=3D"mailto:hoab1608786@student.ctu.edu.vn">hoab1608=
+786@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Thanh Nhu=E1=BA=ADn &lt;<a h=
+ref=3D"mailto:nhuanb1600391@student.ctu.edu.vn">nhuanb1600391@student.ctu.e=
+du.vn</a>&gt;, Nguy=E1=BB=85n Thi=E1=BB=87n Tr=C3=AD &lt;<a href=3D"mailto:=
+TriB1605610@student.ctu.edu.vn">TriB1605610@student.ctu.edu.vn</a>&gt;, Ngu=
+y=E1=BB=85n Th=C3=A1i H=E1=BB=8Dc &lt;<a href=3D"mailto:hocb1507366@student=
+.ctu.edu.vn">hocb1507366@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Th=E1=
+=BB=8B Anh Th=C6=B0 &lt;<a href=3D"mailto:thuB1607544@student.ctu.edu.vn">t=
+huB1607544@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Th=E1=BB=8B Hu=E1=BB=
+=B3nh Nh=C6=B0 &lt;<a href=3D"mailto:nhub1608806@student.ctu.edu.vn">nhub16=
+08806@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Th=E1=BB=8B H=E1=BB=93ng T=
+h=E1=BA=A3o &lt;<a href=3D"mailto:thaob1506969@student.ctu.edu.vn">thaob150=
+6969@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Th=E1=BB=8B Ng=E1=BB=8Dc H=
+=C6=B0=E1=BB=A1ng &lt;<a href=3D"mailto:huongb1607234@student.ctu.edu.vn">h=
+uongb1607234@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Th=E1=BB=8B Ng=E1=
+=BB=8Dc Tr=C3=A2n &lt;<a href=3D"mailto:tranb1602065@student.ctu.edu.vn">tr=
+anb1602065@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Th=E1=BB=8B Ph=C6=B0=
+=C6=A1ng Th=E1=BA=A3o &lt;<a href=3D"mailto:thaob1601065@student.ctu.edu.vn=
+">thaob1601065@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Th=E1=BB=8B T=C3=
+=BA Anh &lt;<a href=3D"mailto:anhb1505439@student.ctu.edu.vn">anhb1505439@s=
+tudent.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n Th=E1=BB=8B Y=E1=BA=BFn Nhi &lt;<=
+a href=3D"mailto:nhib1608750@student.ctu.edu.vn">nhib1608750@student.ctu.ed=
+u.vn</a>&gt;, Nguy=E1=BB=85n Tr=C3=AD Th=E1=BB=A9c &lt;<a href=3D"mailto:th=
+ucb1602723@student.ctu.edu.vn">thucb1602723@student.ctu.edu.vn</a>&gt;, Ngu=
+y=E1=BB=85n Tr=E1=BB=8Dng B=E1=BA=B1ng &lt;<a href=3D"mailto:bangb1509429@s=
+tudent.ctu.edu.vn">bangb1509429@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n =
+Tr=E1=BB=8Dng =C4=90=E1=BB=A9c &lt;<a href=3D"mailto:ducb1610530@student.ct=
+u.edu.vn">ducb1610530@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n V=C4=83n H=
+uynh &lt;<a href=3D"mailto:huynhb1604960@student.ctu.edu.vn">huynhb1604960@=
+student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=85n V=C4=83n L=E1=BB=A3i &lt;<a href=
+=3D"mailto:loib1603806@student.ctu.edu.vn">loib1603806@student.ctu.edu.vn</=
+a>&gt;, Nguy=E1=BB=85n V=C4=83n L=E1=BB=A3i &lt;<a href=3D"mailto:Loib16068=
+17@student.ctu.edu.vn">Loib1606817@student.ctu.edu.vn</a>&gt;, Nguy=E1=BB=
+=85n =C4=90=C4=83ng Khoa &lt;<a href=3D"mailto:khoab1604097@student.ctu.edu=
+.vn">khoab1604097@student.ctu.edu.vn</a>&gt;, Phan Cao K=E1=BB=B3 &lt;<a hr=
+ef=3D"mailto:kyb1506005@student.ctu.edu.vn">kyb1506005@student.ctu.edu.vn</=
+a>&gt;, Phan Ch=C3=AD Nguy=E1=BB=87n &lt;<a href=3D"mailto:nguyenb1607374@s=
+tudent.ctu.edu.vn">nguyenb1607374@student.ctu.edu.vn</a>&gt;, Phan L=C3=AA =
+Thanh Nh=C3=A3 &lt;<a href=3D"mailto:nhab1600779@student.ctu.edu.vn">nhab16=
+00779@student.ctu.edu.vn</a>&gt;, Ph=E1=BA=A1m Ch=C3=AD Thi=E1=BB=87n &lt;<=
+a href=3D"mailto:thienb1604986@student.ctu.edu.vn">thienb1604986@student.ct=
+u.edu.vn</a>&gt;, Ph=E1=BA=A1m Ho=C3=A0ng Kh=E1=BA=A3 T=C3=BA &lt;<a href=
+=3D"mailto:tub1605130@student.ctu.edu.vn">tub1605130@student.ctu.edu.vn</a>=
+&gt;, Ph=E1=BA=A1m Hu=E1=BB=B3nh Lan Ph=C6=B0=C6=A1ng &lt;<a href=3D"mailto=
+:phuongB1600452@student.ctu.edu.vn">phuongB1600452@student.ctu.edu.vn</a>&g=
+t;, Ph=E1=BA=A1m H=E1=BB=93ng Ch=C6=B0=C6=A1ng &lt;<a href=3D"mailto:Chuong=
+B1506932@student.ctu.edu.vn">ChuongB1506932@student.ctu.edu.vn</a>&gt;, Ph=
+=E1=BA=A1m H=E1=BB=93ng Th=C3=A1i &lt;<a href=3D"mailto:thaib1608760@studen=
+t.ctu.edu.vn">thaib1608760@student.ctu.edu.vn</a>&gt;, Ph=E1=BA=A1m Th=E1=
+=BB=8B Chinh &lt;<a href=3D"mailto:chinhb1602076@student.ctu.edu.vn">chinhb=
+1602076@student.ctu.edu.vn</a>&gt;, Ph=E1=BA=A1m Th=E1=BB=8B H=E1=BA=A3i Ng=
+hi &lt;<a href=3D"mailto:nghib1604338@student.ctu.edu.vn">nghib1604338@stud=
+ent.ctu.edu.vn</a>&gt;, Ph=E1=BA=A1m Th=E1=BB=8B Kim Anh &lt;<a href=3D"mai=
+lto:anhb1605133@student.ctu.edu.vn">anhb1605133@student.ctu.edu.vn</a>&gt;,=
+ Ph=E1=BA=A1m Th=E1=BB=8B Kim Trung &lt;<a href=3D"mailto:Trungb1605540@stu=
+dent.ctu.edu.vn">Trungb1605540@student.ctu.edu.vn</a>&gt;, Ph=E1=BA=A1m V=
+=C4=83n D=C5=A9 &lt;<a href=3D"mailto:dub1604749@student.ctu.edu.vn">dub160=
+4749@student.ctu.edu.vn</a>&gt;, Ph=E1=BA=A1m V=C4=83n Hi=E1=BB=81n &lt;<a =
+href=3D"mailto:hienb1704986@student.ctu.edu.vn">hienb1704986@student.ctu.ed=
+u.vn</a>&gt;, Ph=E1=BA=A1m V=C4=83n Truy=E1=BB=81n &lt;<a href=3D"mailto:tr=
+uyenb1701959@student.ctu.edu.vn">truyenb1701959@student.ctu.edu.vn</a>&gt;,=
+ Ph=E1=BA=A1m =C4=90o=C3=A0n M=E1=BB=B9 Ng=E1=BB=8Dc &lt;<a href=3D"mailto:=
+ngocb1605099@student.ctu.edu.vn">ngocb1605099@student.ctu.edu.vn</a>&gt;, T=
+h=C3=A1i Ch=C3=AD Phong &lt;<a href=3D"mailto:phongb1603823@student.ctu.edu=
+.vn">phongb1603823@student.ctu.edu.vn</a>&gt;, Tr=C3=ACnh Th=E1=BB=8B Thanh=
+ Th=C6=B0=C6=A1ng &lt;<a href=3D"mailto:thuongb1606515@student.ctu.edu.vn">=
+thuongb1606515@student.ctu.edu.vn</a>&gt;, Tr=C6=B0=C6=A1ng H=E1=BB=93 M=E1=
+=BB=B9 Ph=C3=BAc &lt;<a href=3D"mailto:phucb1601856@student.ctu.edu.vn">phu=
+cb1601856@student.ctu.edu.vn</a>&gt;, Tr=C6=B0=C6=A1ng Kh=C3=A1nh Nguy=C3=
+=AAn &lt;<a href=3D"mailto:nguyenb1500750@student.ctu.edu.vn">nguyenb150075=
+0@student.ctu.edu.vn</a>&gt;, Tr=C6=B0=C6=A1ng Nguy=E1=BB=85n Th=C3=B9y Lin=
+h &lt;<a href=3D"mailto:linhb1608354@student.ctu.edu.vn">linhb1608354@stude=
+nt.ctu.edu.vn</a>&gt;, Tr=C6=B0=C6=A1ng Th=E1=BB=8B Th=C3=BAy Nguy=C3=AAn &=
+lt;<a href=3D"mailto:nguyenb1603913@student.ctu.edu.vn">nguyenb1603913@stud=
+ent.ctu.edu.vn</a>&gt;, Tr=C6=B0=C6=A1ng =C4=90=E1=BA=A1i D=C5=A9ng &lt;<a =
+href=3D"mailto:dungb1504515@student.ctu.edu.vn">dungb1504515@student.ctu.ed=
+u.vn</a>&gt;, Tr=E1=BA=A7n Ho=C3=A0ng T=C3=ADnh &lt;<a href=3D"mailto:tinhb=
+1707885@student.ctu.edu.vn">tinhb1707885@student.ctu.edu.vn</a>&gt;, Tr=E1=
+=BA=A7n Ho=C3=A0ng =C4=90ang Th=C6=B0 &lt;<a href=3D"mailto:thub1607924@stu=
+dent.ctu.edu.vn">thub1607924@student.ctu.edu.vn</a>&gt;, Tr=E1=BA=A7n Khoa =
+Nguy=C3=AAn &lt;<a href=3D"mailto:NguyenB1603816@student.ctu.edu.vn">Nguyen=
+B1603816@student.ctu.edu.vn</a>&gt;, Tr=E1=BA=A7n M=E1=BB=B9 Ti=C3=AAn &lt;=
+<a href=3D"mailto:tienb1608067@student.ctu.edu.vn">tienb1608067@student.ctu=
+.edu.vn</a>&gt;, Tr=E1=BA=A7n Ng=E1=BB=8Dc Tr=C3=A2n &lt;<a href=3D"mailto:=
+tranb1603603@student.ctu.edu.vn">tranb1603603@student.ctu.edu.vn</a>&gt;, T=
+r=E1=BA=A7n Qu=E1=BB=91c K=C3=ADnh &lt;<a href=3D"mailto:kinhb1503412@stude=
+nt.ctu.edu.vn">kinhb1503412@student.ctu.edu.vn</a>&gt;, Tr=E1=BA=A7n Qu=E1=
+=BB=91c To=C3=A0n &lt;<a href=3D"mailto:toanb1408440@student.ctu.edu.vn">to=
+anb1408440@student.ctu.edu.vn</a>&gt;, Tr=E1=BA=A7n Thanh Gi=C3=A1m &lt;<a =
+href=3D"mailto:giamb1602021@student.ctu.edu.vn">giamb1602021@student.ctu.ed=
+u.vn</a>&gt;, Tr=E1=BA=A7n Thanh Tr=C3=BAc &lt;<a href=3D"mailto:trucb15069=
+81@student.ctu.edu.vn">trucb1506981@student.ctu.edu.vn</a>&gt;, Tr=E1=BA=A7=
+n Th=E1=BB=8B Ng=E1=BB=8Dc Ch=C3=A2u &lt;<a href=3D"mailto:chaub1605071@stu=
+dent.ctu.edu.vn">chaub1605071@student.ctu.edu.vn</a>&gt;, Tr=E1=BA=A7n Th=
+=E1=BB=8B Thanh T=C3=A2m &lt;<a href=3D"mailto:tamb1506023@student.ctu.edu.=
+vn">tamb1506023@student.ctu.edu.vn</a>&gt;, Tr=E1=BA=A7n Th=E1=BB=8B Thi=E1=
+=BB=87n &lt;<a href=3D"mailto:thienb1604987@student.ctu.edu.vn">thienb16049=
+87@student.ctu.edu.vn</a>&gt;, Tr=E1=BA=A7n T=C3=BA Trinh &lt;<a href=3D"ma=
+ilto:trinhb1600471@student.ctu.edu.vn">trinhb1600471@student.ctu.edu.vn</a>=
+&gt;, Tr=E1=BA=A7n V=C4=83n Ngo=C3=A3n &lt;<a href=3D"mailto:ngoanb1607007@=
+student.ctu.edu.vn">ngoanb1607007@student.ctu.edu.vn</a>&gt;, Tr=E1=BA=A7n =
+V=C4=83n T=E1=BA=A5n &lt;<a href=3D"mailto:tanb1505968@student.ctu.edu.vn">=
+tanb1505968@student.ctu.edu.vn</a>&gt;, Tr=E1=BB=8Bnh Gia H=C6=B0ng &lt;<a =
+href=3D"mailto:hungb1603793@student.ctu.edu.vn">hungb1603793@student.ctu.ed=
+u.vn</a>&gt;, T=E1=BB=91ng Minh =C4=90=E1=BB=A9c &lt;<a href=3D"mailto:ducb=
+1608292@student.ctu.edu.vn">ducb1608292@student.ctu.edu.vn</a>&gt;, V=C3=B5=
+ Ho=C3=A0ng H=C6=B0ng &lt;<a href=3D"mailto:hungb1603794@student.ctu.edu.vn=
+">hungb1603794@student.ctu.edu.vn</a>&gt;, V=C3=B5 L=C3=AA Tr=C3=BAc Lam &l=
+t;<a href=3D"mailto:lamb1609868@student.ctu.edu.vn">lamb1609868@student.ctu=
+.edu.vn</a>&gt;, V=C3=B5 Nguy=E1=BB=85n Minh Hi=E1=BA=BFu &lt;<a href=3D"ma=
+ilto:hieub1609966@student.ctu.edu.vn">hieub1609966@student.ctu.edu.vn</a>&g=
+t;, V=C3=B5 Ph=C3=BA Qu=C3=AD &lt;<a href=3D"mailto:quib1601209@student.ctu=
+.edu.vn">quib1601209@student.ctu.edu.vn</a>&gt;, V=C3=B5 Th=E1=BA=BF An &lt=
+;<a href=3D"mailto:anb1606455@student.ctu.edu.vn">anb1606455@student.ctu.ed=
+u.vn</a>&gt;, V=C3=B5 V=C4=83n Ngoan &lt;<a href=3D"mailto:ngoanb1604424@st=
+udent.ctu.edu.vn">ngoanb1604424@student.ctu.edu.vn</a>&gt;, V=C4=83n T=C3=
+=A2n D=C6=B0=C6=A1ng &lt;<a href=3D"mailto:duongb1705088@student.ctu.edu.vn=
+">duongb1705088@student.ctu.edu.vn</a>&gt;, =C4=90o=C3=A0n Ho=C3=A0ng Th=E1=
+=BB=8Bnh &lt;<a href=3D"mailto:thinhb1509414@student.ctu.edu.vn">thinhb1509=
+414@student.ctu.edu.vn</a>&gt;, =C4=90=C3=A0o V=C5=A9 H=C6=B0=C6=A1ng Giang=
+ &lt;<a href=3D"mailto:giangb1409969@student.ctu.edu.vn">giangb1409969@stud=
+ent.ctu.edu.vn</a>&gt;, =C4=90=E1=BA=B7ng Nh=C6=B0 =C3=9D &lt;<a href=3D"ma=
+ilto:yb1701801@student.ctu.edu.vn">yb1701801@student.ctu.edu.vn</a>&gt;, =
+=C4=90=E1=BA=B7ng Thanh Danh &lt;<a href=3D"mailto:danhb1606202@student.ctu=
+.edu.vn">danhb1606202@student.ctu.edu.vn</a>&gt;, =C4=90=E1=BA=B7ng T=E1=BA=
+=A5n =C4=90=E1=BA=A3m &lt;<a href=3D"mailto:damb1710388@student.ctu.edu.vn"=
+>damb1710388@student.ctu.edu.vn</a>&gt;, =C4=90=E1=BA=B7ng V=C4=83n Ph=C3=
+=A1p &lt;<a href=3D"mailto:phapb1605755@student.ctu.edu.vn">phapb1605755@st=
+udent.ctu.edu.vn</a>&gt;, =C4=90=E1=BB=97 Minh Huy &lt;<a href=3D"mailto:hu=
+yb1504442@student.ctu.edu.vn">huyb1504442@student.ctu.edu.vn</a>&gt;<br>Cc:=
+ Do Thanh Nghi 001072 &lt;<a href=3D"mailto:dtnghi@ctu.edu.vn">dtnghi@ctu.e=
+du.vn</a>&gt;, Le Binh Minh 2384 &lt;<a href=3D"mailto:lbminh@ctu.edu.vn">l=
+bminh@ctu.edu.vn</a>&gt;, Le Van Du 1500 &lt;<a href=3D"mailto:lvdu@ctu.edu=
+.vn">lvdu@ctu.edu.vn</a>&gt;, Nguyen Van Ay (CTU) &lt;<a href=3D"mailto:nva=
+y@ctu.edu.vn">nvay@ctu.edu.vn</a>&gt;, Tran Huu Danh 001452 &lt;<a href=3D"=
+mailto:thdanh@ctu.edu.vn">thdanh@ctu.edu.vn</a>&gt;, Bui Anh Tuan 001725 &l=
+t;<a href=3D"mailto:batuan@ctu.edu.vn">batuan@ctu.edu.vn</a>&gt;, Bui Hoang=
+ Dang Long 009724 &lt;<a href=3D"mailto:bhdlong@ctu.edu.vn">bhdlong@ctu.edu=
+.vn</a>&gt;, Bui Hoang Tan 002614 &lt;<a href=3D"mailto:bhtan@ctu.edu.vn">b=
+htan@ctu.edu.vn</a>&gt;, Bui Le Anh Tuan 001916 &lt;<a href=3D"mailto:blatu=
+an@ctu.edu.vn">blatuan@ctu.edu.vn</a>&gt;, Bui Thanh Thao 001607 &lt;<a hre=
+f=3D"mailto:btthao@ctu.edu.vn">btthao@ctu.edu.vn</a>&gt;, Cu Ngoc Thang 002=
+350 &lt;<a href=3D"mailto:cnthang@ctu.edu.vn">cnthang@ctu.edu.vn</a>&gt;, D=
+ai Thi Xuan Trang 001040 &lt;<a href=3D"mailto:dtxtrang@ctu.edu.vn">dtxtran=
+g@ctu.edu.vn</a>&gt;, Dang Huynh Giao 001807 &lt;<a href=3D"mailto:dhgiao@c=
+tu.edu.vn">dhgiao@ctu.edu.vn</a>&gt;, Dang Minh Triet 002097 &lt;<a href=3D=
+"mailto:dmtriet@ctu.edu.vn">dmtriet@ctu.edu.vn</a>&gt;, Dang Tram Anh 00100=
+8 &lt;<a href=3D"mailto:dtanh@ctu.edu.vn">dtanh@ctu.edu.vn</a>&gt;, Dao Ngo=
+c Canh &lt;<a href=3D"mailto:dncanh@ctu.edu.vn">dncanh@ctu.edu.vn</a>&gt;, =
+Diep Kien Vu 000841 &lt;<a href=3D"mailto:dkvu@ctu.edu.vn">dkvu@ctu.edu.vn<=
+/a>&gt;, Dinh Minh Quang 002002 &lt;<a href=3D"mailto:dmquang@ctu.edu.vn">d=
+mquang@ctu.edu.vn</a>&gt;, Do Tan Khang 008936 &lt;<a href=3D"mailto:dtkhan=
+g@ctu.edu.vn">dtkhang@ctu.edu.vn</a>&gt;, Do Thi Xuan 008463 &lt;<a href=3D=
+"mailto:dtxuan@ctu.edu.vn">dtxuan@ctu.edu.vn</a>&gt;, Ho Thanh Tham 002163 =
+&lt;<a href=3D"mailto:httham@ctu.edu.vn">httham@ctu.edu.vn</a>&gt;, Hua Hon=
+g Hieu 008404 &lt;<a href=3D"mailto:hhhieu@ctu.edu.vn">hhhieu@ctu.edu.vn</a=
+>&gt;, Huynh Ngoc Thanh Tam 001768 &lt;<a href=3D"mailto:hnttam@ctu.edu.vn"=
+>hnttam@ctu.edu.vn</a>&gt;, Huynh Ngoc Trang 008844 &lt;<a href=3D"mailto:h=
+ntrang@ctu.edu.vn">hntrang@ctu.edu.vn</a>&gt;, Huynh Thanh Toi 008144 &lt;<=
+a href=3D"mailto:httoi@ctu.edu.vn">httoi@ctu.edu.vn</a>&gt;, Huynh Thi Thu =
+Huong 001273 &lt;<a href=3D"mailto:htthuong@ctu.edu.vn">htthuong@ctu.edu.vn=
+</a>&gt;, Huynh Thi Thuy Diem 000107 &lt;<a href=3D"mailto:httdiem@ctu.edu.=
+vn">httdiem@ctu.edu.vn</a>&gt;, Huynh Trong Phuoc 002507 &lt;<a href=3D"mai=
+lto:htphuoc@ctu.edu.vn">htphuoc@ctu.edu.vn</a>&gt;, Huynh Truong Giang 0086=
+80 &lt;<a href=3D"mailto:htgiang@ctu.edu.vn">htgiang@ctu.edu.vn</a>&gt;, Hu=
+ynh Van Da 001851 &lt;<a href=3D"mailto:hvda@ctu.edu.vn">hvda@ctu.edu.vn</a=
+>&gt;, Huynh Xuan Phong (CTU) &lt;<a href=3D"mailto:hxphong@ctu.edu.vn">hxp=
+hong@ctu.edu.vn</a>&gt;, Khang Pham Nguyen &lt;<a href=3D"mailto:pnkhang@ci=
+t.ctu.edu.vn">pnkhang@cit.ctu.edu.vn</a>&gt;, Khuu Ngoc Huyen 002710 &lt;<a=
+ href=3D"mailto:knhuyen@ctu.edu.vn">knhuyen@ctu.edu.vn</a>&gt;, Kim Lavane =
+001669 &lt;<a href=3D"mailto:klavane@ctu.edu.vn">klavane@ctu.edu.vn</a>&gt;=
+, La Nguyen Thuy Dung (CTU) &lt;<a href=3D"mailto:lntdung@ctu.edu.vn">lntdu=
+ng@ctu.edu.vn</a>&gt;, Lam Hoang Chuong 002084 &lt;<a href=3D"mailto:lhchuo=
+ng@ctu.edu.vn">lhchuong@ctu.edu.vn</a>&gt;, Lam Quoc Anh &lt;<a href=3D"mai=
+lto:quocanh@ctu.edu.vn">quocanh@ctu.edu.vn</a>&gt;, Le Canh Dung 000775 &lt=
+;<a href=3D"mailto:lcdung@ctu.edu.vn">lcdung@ctu.edu.vn</a>&gt;, Le Gia Lam=
+ 001622 &lt;<a href=3D"mailto:lglam@ctu.edu.vn">lglam@ctu.edu.vn</a>&gt;, L=
+e Kim Thanh &lt;<a href=3D"mailto:lkthanh@ctu.edu.vn">lkthanh@ctu.edu.vn</a=
+>&gt;, Le Minh Tuong 002398 &lt;<a href=3D"mailto:lmtuong@ctu.edu.vn">lmtuo=
+ng@ctu.edu.vn</a>&gt;, Le Nong 001677 &lt;<a href=3D"mailto:lenong@ctu.edu.=
+vn">lenong@ctu.edu.vn</a>&gt;, Le Thanh Phuoc (CTU) &lt;<a href=3D"mailto:l=
+tphuoc@ctu.edu.vn">ltphuoc@ctu.edu.vn</a>&gt;, Le Thi Bach 001135 &lt;<a hr=
+ef=3D"mailto:ltbach@ctu.edu.vn">ltbach@ctu.edu.vn</a>&gt;, Le Thi Minh Thuy=
+ (CTU) &lt;<a href=3D"mailto:ltmthuy@ctu.edu.vn">ltmthuy@ctu.edu.vn</a>&gt;=
+, Le Thi Thu Trang &lt;<a href=3D"mailto:ltttrang@ctu.edu.vn">ltttrang@ctu.=
+edu.vn</a>&gt;, Le Thi To Quyen 002485 &lt;<a href=3D"mailto:lttquyen@ctu.e=
+du.vn">lttquyen@ctu.edu.vn</a>&gt;, Le Van Khoa 000284 &lt;<a href=3D"mailt=
+o:lvkhoa@ctu.edu.vn">lvkhoa@ctu.edu.vn</a>&gt;, Luong Huynh Vu Thanh 002229=
+ &lt;<a href=3D"mailto:lhvthanh@ctu.edu.vn">lhvthanh@ctu.edu.vn</a>&gt;, Ly=
+ Thi Lien Khai (CTU) &lt;<a href=3D"mailto:ltlkhai@ctu.edu.vn">ltlkhai@ctu.=
+edu.vn</a>&gt;, Minh Thai TRUONG &lt;<a href=3D"mailto:tmthai@ctu.edu.vn">t=
+mthai@ctu.edu.vn</a>&gt;, Ngo Ba Hung 001124 &lt;<a href=3D"mailto:nbhung@c=
+tu.edu.vn">nbhung@ctu.edu.vn</a>&gt;, Ngo Quoc Luan 001534 &lt;<a href=3D"m=
+ailto:ngoquocluan@ctu.edu.vn">ngoquocluan@ctu.edu.vn</a>&gt;, Ngo Thanh Pho=
+ng (CTU) &lt;<a href=3D"mailto:ngophong@ctu.edu.vn">ngophong@ctu.edu.vn</a>=
+&gt;, Ngo Thi Phuong Dung (CTU) &lt;<a href=3D"mailto:ntpdung@ctu.edu.vn">n=
+tpdung@ctu.edu.vn</a>&gt;, Ngo Thuy Diem Trang 002359 &lt;<a href=3D"mailto=
+:ntdtrang@ctu.edu.vn">ntdtrang@ctu.edu.vn</a>&gt;, Ngo Truong Ngoc Mai 0017=
+65 &lt;<a href=3D"mailto:ntnmai@ctu.edu.vn">ntnmai@ctu.edu.vn</a>&gt;, Nguy=
+en Anh Duy 001928 &lt;<a href=3D"mailto:naduy@ctu.edu.vn">naduy@ctu.edu.vn<=
+/a>&gt;, Nguyen Chanh Nghiem 001941 &lt;<a href=3D"mailto:ncnghiem@ctu.edu.=
+vn">ncnghiem@ctu.edu.vn</a>&gt;, Nguyen Chi Ngon (CTU) &lt;<a href=3D"mailt=
+o:ncngon@ctu.edu.vn">ncngon@ctu.edu.vn</a>&gt;, Nguyen Cong Thuan 002440 &l=
+t;<a href=3D"mailto:ncthuan@ctu.edu.vn">ncthuan@ctu.edu.vn</a>&gt;, Nguyen =
+Dien Trung 002314 &lt;<a href=3D"mailto:ndtrung@ctu.edu.vn">ndtrung@ctu.edu=
+.vn</a>&gt;, Nguyen Dinh Giang Nam (CTU) &lt;<a href=3D"mailto:ndgnam@ctu.e=
+du.vn">ndgnam@ctu.edu.vn</a>&gt;, Nguyen Hoang Dung &lt;<a href=3D"mailto:h=
+oangdung@ctu.edu.vn">hoangdung@ctu.edu.vn</a>&gt;, Nguyen Hong Nam (CTU) &l=
+t;<a href=3D"mailto:nhnam@ctu.edu.vn">nhnam@ctu.edu.vn</a>&gt;, Nguyen Huu =
+Hiep 000742 &lt;<a href=3D"mailto:nhhiep@ctu.edu.vn">nhhiep@ctu.edu.vn</a>&=
+gt;, Nguyen Ngoc My &lt;<a href=3D"mailto:nnmy@cit.ctu.edu.vn">nnmy@cit.ctu=
+.edu.vn</a>&gt;, Nguyen Pham Anh Thi 002774 &lt;<a href=3D"mailto:npathi@ct=
+u.edu.vn">npathi@ctu.edu.vn</a>&gt;, Nguyen Thai Son 002156 &lt;<a href=3D"=
+mailto:thaison@ctu.edu.vn">thaison@ctu.edu.vn</a>&gt;, Nguyen Thanh Giao 00=
+2783 &lt;<a href=3D"mailto:ntgiao@ctu.edu.vn">ntgiao@ctu.edu.vn</a>&gt;, Ng=
+uyen Thi Bach Kim 002462 &lt;<a href=3D"mailto:ntbkim@ctu.edu.vn">ntbkim@ct=
+u.edu.vn</a>&gt;, Nguyen Thi Be Ba 002672 &lt;<a href=3D"mailto:ntbba@ctu.e=
+du.vn">ntbba@ctu.edu.vn</a>&gt;, Nguyen Thi Bich Thuyen 001683 &lt;<a href=
+=3D"mailto:ntbthuyen@ctu.edu.vn">ntbthuyen@ctu.edu.vn</a>&gt;, Nguyen Thi H=
+a 002103 &lt;<a href=3D"mailto:ntha@ctu.edu.vn">ntha@ctu.edu.vn</a>&gt;, Ng=
+uyen Thi Hong Dan 002225 &lt;<a href=3D"mailto:nthdan@ctu.edu.vn">nthdan@ct=
+u.edu.vn</a>&gt;, Nguyen Thi Hong Diep 001289 &lt;<a href=3D"mailto:nthdiep=
+@ctu.edu.vn">nthdiep@ctu.edu.vn</a>&gt;, Nguyen Thi Hong-002243 002243 &lt;=
+<a href=3D"mailto:nthong43@ctu.edu.vn">nthong43@ctu.edu.vn</a>&gt;, Nguyen =
+Thi Kieu Oanh 002486 &lt;<a href=3D"mailto:kieuoanh@ctu.edu.vn">kieuoanh@ct=
+u.edu.vn</a>&gt;, Nguyen Thi Kim Chi 001250 &lt;<a href=3D"mailto:chinguyen=
+@ctu.edu.vn">chinguyen@ctu.edu.vn</a>&gt;, Nguyen Thi Le Thuy 002056 &lt;<a=
+ href=3D"mailto:ntlethuy@ctu.edu.vn">ntlethuy@ctu.edu.vn</a>&gt;, Nguyen Th=
+i Lien 001890 &lt;<a href=3D"mailto:ntlien@ctu.edu.vn">ntlien@ctu.edu.vn</a=
+>&gt;, Nguyen Thi Pha 001769 &lt;<a href=3D"mailto:ntpha@ctu.edu.vn">ntpha@=
+ctu.edu.vn</a>&gt;, Nguyen Thu Tam 002251 &lt;<a href=3D"mailto:nttamty@ctu=
+.edu.vn">nttamty@ctu.edu.vn</a>&gt;, Nguyen Tri Tuan 001076 &lt;<a href=3D"=
+mailto:trituan@ctu.edu.vn">trituan@ctu.edu.vn</a>&gt;, Nguyen Trong Hong Ph=
+uc 002001 &lt;<a href=3D"mailto:nthphuc@ctu.edu.vn">nthphuc@ctu.edu.vn</a>&=
+gt;, Nguyen Trung Kien 002236 &lt;<a href=3D"mailto:trungkien@ctu.edu.vn">t=
+rungkien@ctu.edu.vn</a>&gt;, Nguyen Truong Thanh 001681 &lt;<a href=3D"mail=
+to:ntthanh@ctu.edu.vn">ntthanh@ctu.edu.vn</a>&gt;, Nguyen Van Tron 002589 &=
+lt;<a href=3D"mailto:nvtron@ctu.edu.vn">nvtron@ctu.edu.vn</a>&gt;, Nguyen V=
+o Chau Ngan 001297 &lt;<a href=3D"mailto:nvcngan@ctu.edu.vn">nvcngan@ctu.ed=
+u.vn</a>&gt;, Nguyen Xuan Hoang 001246 &lt;<a href=3D"mailto:nxhoang@ctu.ed=
+u.vn">nxhoang@ctu.edu.vn</a>&gt;, Pham Anh Du 001822 &lt;<a href=3D"mailto:=
+padu@ctu.edu.vn">padu@ctu.edu.vn</a>&gt;, Pham Huu Ha Giang 001808 &lt;<a h=
+ref=3D"mailto:phhgiang@ctu.edu.vn">phhgiang@ctu.edu.vn</a>&gt;, Pham Nguyen=
+ Hoang 002640 &lt;<a href=3D"mailto:pnhoang@ctu.edu.vn">pnhoang@ctu.edu.vn<=
+/a>&gt;, Pham Thanh Vu 001407 &lt;<a href=3D"mailto:ptvu@ctu.edu.vn">ptvu@c=
+tu.edu.vn</a>&gt;, Pham Thi Phuong Thao &lt;<a href=3D"mailto:ptpthao@ctu.e=
+du.vn">ptpthao@ctu.edu.vn</a>&gt;, Pham Thi Vui 001724 &lt;<a href=3D"mailt=
+o:ptvui@ctu.edu.vn">ptvui@ctu.edu.vn</a>&gt;, Pham Van Trong Tinh 002478 &l=
+t;<a href=3D"mailto:pvttinh@ctu.edu.vn">pvttinh@ctu.edu.vn</a>&gt;, Pham Vi=
+et Nu 002206 &lt;<a href=3D"mailto:pvnu@ctu.edu.vn">pvnu@ctu.edu.vn</a>&gt;=
+, Phan Kieu Diem 008796 &lt;<a href=3D"mailto:pkdiem@ctu.edu.vn">pkdiem@ctu=
+.edu.vn</a>&gt;, Phan Kim Dinh 000027 &lt;<a href=3D"mailto:pkdinh@ctu.edu.=
+vn">pkdinh@ctu.edu.vn</a>&gt;, Phan Thanh Thuan &lt;<a href=3D"mailto:ptthu=
+an@ctu.edu.vn">ptthuan@ctu.edu.vn</a>&gt;, Phan Viet Thang 002245 &lt;<a hr=
+ef=3D"mailto:vietthang@ctu.edu.vn">vietthang@ctu.edu.vn</a>&gt;, Phuong Hoa=
+ng Yen 001464 &lt;<a href=3D"mailto:phyen@ctu.edu.vn">phyen@ctu.edu.vn</a>&=
+gt;, Thieu Quang Quoc Viet &lt;<a href=3D"mailto:tqqviet@ctu.edu.vn">tqqvie=
+t@ctu.edu.vn</a>&gt;, Tran Ba Linh 001406 &lt;<a href=3D"mailto:tblinh@ctu.=
+edu.vn">tblinh@ctu.edu.vn</a>&gt;, Tran Minh Phu &lt;<a href=3D"mailto:tmph=
+u@ctu.edu.vn">tmphu@ctu.edu.vn</a>&gt;, Tran Minh Tan &lt;<a href=3D"mailto=
+:tmtan@ctu.edu.vn">tmtan@ctu.edu.vn</a>&gt;, Tran Minh Thuan (CTU) &lt;<a h=
+ref=3D"mailto:tranminhkc@ctu.edu.vn">tranminhkc@ctu.edu.vn</a>&gt;, Tran Ng=
+oc Hai 000273 &lt;<a href=3D"mailto:tnhai@ctu.edu.vn">tnhai@ctu.edu.vn</a>&=
+gt;, Tran Nguyen Phuong Lan 002274 &lt;<a href=3D"mailto:tnplan@ctu.edu.vn"=
+>tnplan@ctu.edu.vn</a>&gt;, Tran Nhut Khai Hoan &lt;<a href=3D"mailto:tnkho=
+an@ctu.edu.vn">tnkhoan@ctu.edu.vn</a>&gt;, Tran Quang De 001743 &lt;<a href=
+=3D"mailto:tqde@ctu.edu.vn">tqde@ctu.edu.vn</a>&gt;, Tran Thanh Hung 001064=
+ &lt;<a href=3D"mailto:tthung@ctu.edu.vn">tthung@ctu.edu.vn</a>&gt;, Tran T=
+hanh Men &lt;<a href=3D"mailto:ttmen@ctu.edu.vn">ttmen@ctu.edu.vn</a>&gt;, =
+Tran Thi Bach Yen 2279 &lt;<a href=3D"mailto:ttbyen@ctu.edu.vn">ttbyen@ctu.=
+edu.vn</a>&gt;, Tran Thi Diem Can 002505 &lt;<a href=3D"mailto:ttdcan@ctu.e=
+du.vn">ttdcan@ctu.edu.vn</a>&gt;, Tran Thi Kim Hong 001387 &lt;<a href=3D"m=
+ailto:ttkhong@ctu.edu.vn">ttkhong@ctu.edu.vn</a>&gt;, Tran Thi Phuong 00192=
+6 &lt;<a href=3D"mailto:ttphuong@ctu.edu.vn">ttphuong@ctu.edu.vn</a>&gt;, T=
+ran Thi Thanh Khuong 002773 &lt;<a href=3D"mailto:tttkhuong@ctu.edu.vn">ttt=
+khuong@ctu.edu.vn</a>&gt;, Tran Thi Tuyet Hoa 001796 &lt;<a href=3D"mailto:=
+ttthoa@ctu.edu.vn">ttthoa@ctu.edu.vn</a>&gt;, Tran Van Dung 001405 &lt;<a h=
+ref=3D"mailto:tvandung@ctu.edu.vn">tvandung@ctu.edu.vn</a>&gt;, Tran Van Hi=
+eu 000707 &lt;<a href=3D"mailto:tvhieu@ctu.edu.vn">tvhieu@ctu.edu.vn</a>&gt=
+;, TRan Van Hung (CTU) &lt;<a href=3D"mailto:tvanhung@ctu.edu.vn">tvanhung@=
+ctu.edu.vn</a>&gt;, Tran Vu An 001812 &lt;<a href=3D"mailto:tranvuan@ctu.ed=
+u.vn">tranvuan@ctu.edu.vn</a>&gt;, Truong Chi Quang &lt;<a href=3D"mailto:t=
+cquang@ctu.edu.vn">tcquang@ctu.edu.vn</a>&gt;, Truong Hoang Dan (CTU) &lt;<=
+a href=3D"mailto:thdan@ctu.edu.vn">thdan@ctu.edu.vn</a>&gt;, Truong Thi Bic=
+h Van 008481 &lt;<a href=3D"mailto:ttbvan@ctu.edu.vn">ttbvan@ctu.edu.vn</a>=
+&gt;, Truong Thi Thanh Tuyen 001068 &lt;<a href=3D"mailto:ttttuyen@ctu.edu.=
+vn">ttttuyen@ctu.edu.vn</a>&gt;, Van Ly Tran &lt;<a href=3D"mailto:tvly@ctu=
+.edu.vn">tvly@ctu.edu.vn</a>&gt;, Van Pham Dang Tri (CTU) &lt;<a href=3D"ma=
+ilto:vpdtri@ctu.edu.vn">vpdtri@ctu.edu.vn</a>&gt;, Vo Phuong Quyen 001466 &=
+lt;<a href=3D"mailto:vpquyen@ctu.edu.vn">vpquyen@ctu.edu.vn</a>&gt;, Vo Qua=
+ng Minh (CTU) &lt;<a href=3D"mailto:vqminh@ctu.edu.vn">vqminh@ctu.edu.vn</a=
+>&gt;, Vo Quoc Tuan 008466 &lt;<a href=3D"mailto:vqtuan@ctu.edu.vn">vqtuan@=
+ctu.edu.vn</a>&gt;, Vo Thi Phuong Linh 002643 &lt;<a href=3D"mailto:vtplinh=
+@ctu.edu.vn">vtplinh@ctu.edu.vn</a>&gt;, Vo Van Dau 001685 &lt;<a href=3D"m=
+ailto:vvdau@ctu.edu.vn">vvdau@ctu.edu.vn</a>&gt;, Vo Van Song Toan 002338 &=
+lt;<a href=3D"mailto:vvstoan@ctu.edu.vn">vvstoan@ctu.edu.vn</a>&gt;, vvtai =
+&lt;<a href=3D"mailto:vvtai@ctu.edu.vn">vvtai@ctu.edu.vn</a>&gt;, Tran Thi =
+Kim Chi 002793 &lt;<a href=3D"mailto:ttkchi@ctu.edu.vn">ttkchi@ctu.edu.vn</=
+a>&gt;<br></div><br><br><div dir=3D"ltr"><div dir=3D"ltr" class=3D"m_508994=
+6569381470745gmail_signature" data-smartmail=3D"gmail_signature"><div dir=
+=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr=
+"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div =
+dir=3D"ltr"><div class=3D"m_5089946569381470745gmail-gs" style=3D"margin:0p=
+x;padding:0px 0px 20px;width:950px;font-family:Roboto,RobotoDraft,Helvetica=
+,Arial,sans-serif;font-size:medium"><div class=3D"m_5089946569381470745gmai=
+l-"><div id=3D"m_5089946569381470745gmail-:13t" class=3D"m_5089946569381470=
+745gmail-ii m_5089946569381470745gmail-gt" style=3D"font-size:0.875rem;dire=
+ction:ltr;margin:8px 0px 0px;padding:0px"><div id=3D"m_5089946569381470745g=
+mail-:13s" class=3D"m_5089946569381470745gmail-a3s m_5089946569381470745gma=
+il-aXjCH" style=3D"overflow:hidden;font-variant-numeric:normal;font-variant=
+-east-asian:normal;font-stretch:normal;font-size:small;line-height:1.5;font=
+-family:Arial,Helvetica,sans-serif"><div dir=3D"ltr"><div dir=3D"ltr" class=
+=3D"m_5089946569381470745gmail-m_7803808663072799345gmail_signature"><div d=
+ir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"l=
+tr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><di=
+v dir=3D"ltr"><font size=3D"4">C=C3=A1c em sinh vi=C3=AAn th=C3=A2n m=E1=BA=
+=BFn !</font><div><font size=3D"4">Cc: qu=C3=BD Th=E1=BA=A7y C=C3=B4 l=C3=
+=A0 CBHD=C2=A0!</font></div><div><font size=3D"4"><br></font></div><blockqu=
+ote style=3D"margin:0px 0px 0px 40px;border:none;padding:0px"><div><font si=
+ze=3D"4">C=C3=A1c em =C4=91=C3=A3 t=E1=BA=A1m =E1=BB=A9ng=C2=A0<span class=
+=3D"m_5089946569381470745gmail-il">kinh</span>=C2=A0<span class=3D"m_508994=
+6569381470745gmail-il">ph=C3=AD</span>=C2=A0th=E1=BB=B1c hi=E1=BB=87n =C4=
+=91=E1=BB=81 t=C3=A0i =C4=91=E1=BB=A3t 1 r=E1=BB=93i,</font></div><div><fon=
+t size=3D"4">c=C3=A1c em tri=E1=BB=83n khai =C4=91=E1=BB=81 t=C3=A0i theo t=
+i=E1=BA=BFn =C4=91=E1=BB=99 trong thuy=E1=BA=BFt minh</font></div><div><fon=
+t size=3D"4">v=C3=A0 ti=E1=BA=BFn h=C3=A0nh=C2=A0<span class=3D"m_508994656=
+9381470745gmail-m_7803808663072799345gmail-il"><span class=3D"m_50899465693=
+81470745gmail-il">thanh</span></span>=C2=A0<span class=3D"m_508994656938147=
+0745gmail-m_7803808663072799345gmail-il"><span class=3D"m_50899465693814707=
+45gmail-il">to=C3=A1n</span></span>=C2=A0<span class=3D"m_50899465693814707=
+45gmail-il">kinh</span>=C2=A0<span class=3D"m_5089946569381470745gmail-il">=
+ph=C3=AD</span>=C2=A0=C4=91=C3=A3 t=E1=BA=A1m =E1=BB=A9ng khi c=C3=B3 =C4=
+=91=E1=BA=A7y =C4=91=E1=BB=A7</font></div><div><font size=3D"4">c=C3=A1c ch=
+=E1=BB=A9ng t=E1=BB=AB li=C3=AAn quan v=C3=A0 t=E1=BA=A1m =E1=BB=A9ng ph=E1=
+=BA=A7n=C2=A0<span class=3D"m_5089946569381470745gmail-il">kinh</span>=C2=
+=A0<span class=3D"m_5089946569381470745gmail-il">ph=C3=AD</span>=C2=A0c=C3=
+=B2n l=E1=BA=A1i</font></div></blockquote><blockquote style=3D"margin:0px 0=
+px 0px 40px;border:none;padding:0px"><font size=3D"4">=C4=91=E1=BB=83 ti=E1=
+=BA=BFp t=E1=BB=A5c tri=E1=BB=83n khai, nghi=E1=BB=87m thu =C4=91=E1=BB=81 =
+t=C3=A0i.<br><br><font color=3D"#ff0000">=C4=90=E1=BB=81 t=C3=A0i c=E1=BB=
+=A7a c=C3=A1c em s=E1=BA=BD nghi=E1=BB=87m thu ch=E1=BA=ADm nh=E1=BA=A5t l=
+=C3=A0 31/10/2019.</font></font></blockquote><blockquote style=3D"margin:0p=
+x 0px 0px 40px;border:none;padding:0px"><div><br></div></blockquote><span s=
+tyle=3D"font-size:large">H=E1=BB=93 s=C6=A1=C2=A0</span><span class=3D"m_50=
+89946569381470745gmail-m_7803808663072799345gmail-il" style=3D"font-size:la=
+rge"><span class=3D"m_5089946569381470745gmail-il">thanh</span></span><span=
+ style=3D"font-size:large">=C2=A0</span><span class=3D"m_508994656938147074=
+5gmail-m_7803808663072799345gmail-il" style=3D"font-size:large"><span class=
+=3D"m_5089946569381470745gmail-il">to=C3=A1n</span></span><span style=3D"fo=
+nt-size:large">=C2=A0g=E1=BB=93m:</span><br><blockquote style=3D"margin:0px=
+ 0px 0px 40px;border:none;padding:0px"><div><font size=3D"4">(1) Gi=E1=BA=
+=A5y =C4=91=E1=BB=81 ngh=E1=BB=8B=C2=A0<span class=3D"m_5089946569381470745=
+gmail-m_7803808663072799345gmail-il"><span class=3D"m_5089946569381470745gm=
+ail-il">thanh</span></span>=C2=A0<span class=3D"m_5089946569381470745gmail-=
+m_7803808663072799345gmail-il"><span class=3D"m_5089946569381470745gmail-il=
+">to=C3=A1n</span></span>: in 01 b=E1=BA=A3n.</font></div><div><font size=
+=3D"4">(2) B=E1=BA=A3ng k=C3=AA ch=E1=BB=A9ng t=E1=BB=AB=C2=A0<span class=
+=3D"m_5089946569381470745gmail-m_7803808663072799345gmail-il"><span class=
+=3D"m_5089946569381470745gmail-il">thanh</span></span>=C2=A0<span class=3D"=
+m_5089946569381470745gmail-m_7803808663072799345gmail-il"><span class=3D"m_=
+5089946569381470745gmail-il">to=C3=A1n</span></span>: in 01 b=E1=BA=A3n.</f=
+ont></div></blockquote><blockquote style=3D"margin:0px 0px 0px 40px;border:=
+none;padding:0px"><div><font size=3D"4">(3) B=E1=BA=A3ng k=C3=AA kh=E1=BB=
+=91i l=C6=B0=E1=BB=A3ng c=C3=B4ng vi=E1=BB=87c =C4=91=C3=A3 th=E1=BB=B1c hi=
+=E1=BB=87n:=C2=A0</font></div><div><span style=3D"font-size:large">in 02 b=
+=E1=BA=A3n,=C2=A0</span><span style=3D"font-size:large">ch=E1=BB=89 y=C3=AA=
+u c=E1=BA=A7u ch=E1=BB=A7 nhi=E1=BB=87m =C4=91=E1=BB=81 t=C3=A0i k=C3=BD t=
+=C3=AAn =E1=BB=9F trang 02,=C2=A0</span></div><div><span style=3D"font-size=
+:large">c=C3=A1c ch=E1=BB=AF k=C3=BD c=C3=B2n l=E1=BA=A1i =E1=BB=9F trang 0=
+2 v=C3=A0 trang 03, Ph=C3=B2ng QLKH v=C3=A0 Ph=C3=B2ng T=C3=A0i ch=C3=ADnh =
+s=E1=BA=BD tr=C3=ACnh k=C3=BD,</span></div></blockquote><blockquote style=
+=3D"margin:0px 0px 0px 40px;border:none;padding:0px"><div><span style=3D"fo=
+nt-size:large">trang 3 =C4=91=C6=B0=E1=BB=A3c in tr=C3=AAn 01 t=E1=BB=9D A4=
+ =C4=91=E1=BB=99c l=E1=BA=ADp.</span></div></blockquote><blockquote style=
+=3D"margin:0px 0px 0px 40px;border:none;padding:0px"><div><font size=3D"4">=
+(4) C=C3=A1c ch=E1=BB=A9ng t=E1=BB=AB li=C3=AAn quan theo d=E1=BB=B1=C2=A0<=
+span class=3D"m_5089946569381470745gmail-m_7803808663072799345gmail-il"><sp=
+an class=3D"m_5089946569381470745gmail-il">to=C3=A1n</span></span>=C2=A0<sp=
+an class=3D"m_5089946569381470745gmail-il">kinh</span>=C2=A0<span class=3D"=
+m_5089946569381470745gmail-il">ph=C3=AD</span>.</font></div></blockquote><b=
+lockquote style=3D"margin:0px 0px 0px 40px;border:none;padding:0px"><div><f=
+ont size=3D"4">(5) Gi=E1=BA=A5y =C4=91=E1=BB=81 ngh=E1=BB=8B t=E1=BA=A1m =
+=E1=BB=A9ng kinh ph=C3=AD (n=E1=BA=BFu c=C3=B3).</font></div></blockquote><=
+blockquote style=3D"margin:0px 0px 0px 40px;border:none;padding:0px"><div><=
+font size=3D"4" color=3D"#0000ff">T=E1=BA=A5t c=E1=BA=A3 c=C3=A1c bi=E1=BB=
+=83u m=E1=BA=ABu n=C3=A0y anh =C4=91=C3=A3 g=E1=BB=ADi cho c=C3=A1c em khi =
+th=E1=BB=B1c hi=E1=BB=87n th=E1=BB=A7 t=E1=BB=A5c k=C3=BD h=E1=BB=A3p =C4=
+=91=E1=BB=93ng.</font></div><div><font size=3D"4" color=3D"#0000ff">Thanh t=
+o=C3=A1n kinh ph=C3=AD l=E1=BA=A7n 2 =C4=91=C6=B0=E1=BB=A3c th=E1=BB=B1c hi=
+=E1=BB=87n sau khi nghi=E1=BB=87m thu xong =C4=91=E1=BB=81 t=C3=A0i.</font>=
+</div></blockquote><blockquote style=3D"margin:0px 0px 0px 40px;border:none=
+;padding:0px"><div><font size=3D"4"><br></font></div></blockquote><blockquo=
+te style=3D"margin:0px 0px 0px 40px;border:none;padding:0px"><font size=3D"=
+4"><font color=3D"#0000ff">Trong qu=C3=A1 tr=C3=ACnh l=C3=A0m h=E1=BB=93 s=
+=C6=A1=C2=A0<span class=3D"m_5089946569381470745gmail-m_7803808663072799345=
+gmail-il"><span class=3D"m_5089946569381470745gmail-il">thanh</span></span>=
+=C2=A0<span class=3D"m_5089946569381470745gmail-m_7803808663072799345gmail-=
+il"><span class=3D"m_5089946569381470745gmail-il">to=C3=A1n</span></span>, =
+c=C3=A1c em c=E1=BA=A7n =C4=91=E1=BA=BFn Ph=C3=B2ng T=C3=A0i ch=C3=ADnh<br>=
+g=E1=BA=B7p c=C3=B4 Chi =C4=91=E1=BB=83 =C4=91=C6=B0=E1=BB=A3c h=C6=B0=E1=
+=BB=9Bng d=E1=BA=ABn v=C3=A0 xem tr=C6=B0=E1=BB=9Bc c=C3=A1c h=E1=BB=93 s=
+=C6=A1.<br>Khi h=E1=BB=93 s=C6=A1 =C4=91=C3=A3 =C4=91=C3=BAng r=E1=BB=93i=
+=C2=A0c=C3=A1c em mang h=E1=BB=93 s=C6=A1 =C4=91=E1=BA=BFn n=E1=BB=99p cho =
+anh T=E1=BA=A5n =E1=BB=9F L=E1=BA=A7u 5 - Nh=C3=A0 =C4=90i=E1=BB=81u h=C3=
+=A0nh,<br>anh s=E1=BA=BD tr=C3=ACnh k=C3=BD =C4=91=E1=BB=83 c=C3=A1c em =C4=
+=91i=C2=A0<span class=3D"m_5089946569381470745gmail-m_7803808663072799345gm=
+ail-il"><span class=3D"m_5089946569381470745gmail-il">thanh</span></span>=
+=C2=A0<span class=3D"m_5089946569381470745gmail-m_7803808663072799345gmail-=
+il"><span class=3D"m_5089946569381470745gmail-il">to=C3=A1n</span></span>.<=
+/font><br><br></font></blockquote><div><div><div class=3D"m_508994656938147=
+0745gmail-m_7803808663072799345gmail-m_3584254063617726848gmail_signature">=
+<div dir=3D"ltr"><div><div dir=3D"ltr"><div><div dir=3D"ltr"><div><div dir=
+=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr=
+"><div><font size=3D"4">Th=C3=A2n ch=C3=A0o c=C3=A1c em.</font></div><div><=
+font size=3D"4">---------------------------<br>Nguy=E1=BB=85n V=C4=83n T=E1=
+=BA=A5n</font></div><div><font size=3D"4">Ph=C3=B2ng Qu=E1=BA=A3n l=C3=BD K=
+hoa h=E1=BB=8Dc</font></div><div><font size=3D"4">Tr=C6=B0=E1=BB=9Dng =C4=
+=90=E1=BA=A1i h=E1=BB=8Dc C=E1=BA=A7n Th=C6=A1.</font></div></div></div></d=
+iv></div></div></div></div></div></div></div></div></div></div></div></div>=
+</div></div></div></div></div></div></div></div></div></div></div><div clas=
+s=3D"m_5089946569381470745gmail-yj6qo"></div><div class=3D"m_50899465693814=
+70745gmail-adL"></div></div></div><div class=3D"m_5089946569381470745gmail-=
+hq m_5089946569381470745gmail-gt m_5089946569381470745gmail-a10" id=3D"m_50=
+89946569381470745gmail-:14m" style=3D"margin:15px 0px;clear:both;font-size:=
+0.875rem"><div class=3D"m_5089946569381470745gmail-hp" style=3D"width:950px=
+;border-top:1px dotted rgb(216,216,216)"></div><div class=3D"m_508994656938=
+1470745gmail-a3I" style=3D"width:1px;height:1px;overflow:hidden">V=C3=B9ng =
+t=E1=BB=87p =C4=91=C3=ADnh k=C3=A8m</div><div id=3D"m_5089946569381470745gm=
+ail-:14p"></div><div class=3D"m_5089946569381470745gmail-aQH" id=3D"m_50899=
+46569381470745gmail-:14o" style=3D"padding-top:16px"><div class=3D"m_508994=
+6569381470745gmail-aZK" style=3D"height:0px;overflow:hidden;clear:both"></d=
+iv></div></div><div class=3D"m_5089946569381470745gmail-hi" style=3D"border=
+-bottom-left-radius:1px;border-bottom-right-radius:1px;padding:0px;width:au=
+to;background:rgb(242,242,242);margin:0px"></div></div></div><br class=3D"m=
+_5089946569381470745gmail-Apple-interchange-newline"></div></div></div></di=
+v></div></div></div></div></div></div></div></div>
+</div></div>
+
+--000000000000def58505932fb71b--
